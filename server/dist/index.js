@@ -15,7 +15,10 @@ const errorHandler_1 = require("./middleware/errorHandler");
 const app = (0, express_1.default)();
 // Configuration
 dotenv_1.default.config();
-app.use((0, cors_1.default)());
+app.use((0, cors_1.default)({
+    origin: "http://localhost:3000",
+    credentials: true,
+}));
 app.use(express_1.default.json());
 app.use(helmet_1.default.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use((0, morgan_1.default)("common"));

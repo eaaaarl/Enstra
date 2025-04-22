@@ -13,12 +13,13 @@ import {
 } from "@/components/ui/form";
 import { useSignUpForm } from "../hooks/useSignUpForm";
 import Link from "next/link";
+import { Loader2 } from "lucide-react";
 
 export function SignUpForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"form">) {
-  const { form, handleSubmit } = useSignUpForm();
+  const { form, handleSubmit, isLoading } = useSignUpForm();
   return (
     <Form {...form}>
       <form
@@ -108,8 +109,12 @@ export function SignUpForm({
               )}
             />
           </div>
-          <Button type="submit" className="w-full">
-            Sign Up
+          <Button type="submit" disabled={isLoading} className="w-full">
+            {isLoading ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              "Sign Up"
+            )}
           </Button>
           <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
             <span className="relative z-10 bg-background px-2 text-muted-foreground">
