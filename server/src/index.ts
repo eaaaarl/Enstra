@@ -6,6 +6,9 @@ import morgan from "morgan";
 import cors from "cors";
 import helmet from "helmet";
 
+import authRoute from "./auth/auth.route";
+import { errorHandler } from "./middleware/errorHandler";
+
 const app = express();
 
 // Configuration
@@ -25,7 +28,10 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
+app.use('/api/auth', authRoute)
+
 //ERROR HANDLER
+app.use(errorHandler);
 
 // SERVER CONFIGURATION
 const PORT = process.env.PORT || 3002;

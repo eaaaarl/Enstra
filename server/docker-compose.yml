@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: enstra_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: enstra_user
+      POSTGRES_PASSWORD: enstra_password
+      POSTGRES_DB: enstra_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
