@@ -7,6 +7,7 @@ import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
 export class AuthRepository implements IAuthRepository {
     private prisma = new PrismaClient()
+    
     async createUser(payload: signUpData) {
         try {
             const newUser = await this.prisma.user.create({
@@ -59,6 +60,33 @@ export class AuthRepository implements IAuthRepository {
         throw error;
       }
     }
+
+    async findById(id: string) {
+        try {
+          const user = await this.prisma.user.findUnique({
+              where: {
+                id
+              }
+          })
+  
+          if (!user) {
+              return null;
+          }
+  
+          return {
+              id: user?.id ?? "",
+              name: user?.name ?? "",
+              studentId: user?.studentId ?? "",
+              email: user?.email ?? "",
+              password: user?.password ?? ""
+          }
+        } catch (error) {
+          if(error instanceof PrismaClientKnownRequestError) {
+              throw new DatabaseError("Failed to find user ID at findById method")
+          }
+          throw error;
+        }
+      }
 
     async findByStudentId(studentId: string) {
         try {

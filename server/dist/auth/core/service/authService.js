@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const bcrypt_1 = require("../../../lib/bcrypt");
 const customErrors_1 = require("../../../lib/customErrors");
+const verifyToken_1 = require("../../../lib/verifyToken");
 const auth_1 = require("../schema/auth");
 class AuthService {
     constructor(authRespository) {
@@ -36,6 +37,39 @@ class AuthService {
                 studentId
             });
             return newUser;
+        });
+    }
+    signIn(signInData) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { email, password } = auth_1.signInSchema.parse(signInData);
+            const user = yield this.authRespository.findByEmail(email);
+            if (!user) {
+                throw new customErrors_1.ValidationError("Email or password is incorrect");
+            }
+            const isValidPassword = (0, bcrypt_1.passwordCompare)(password, user.password);
+            if (!isValidPassword) {
+                throw new customErrors_1.ValidationError("Email or password is incorrect");
+            }
+            return user;
+        });
+    }
+    validateToken(token) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const decoded = (0, verifyToken_1.verifyToken)(token);
+                const user = yield this.authRespository.findById(decoded.userId);
+                if (user) {
+                    return {
+                        id: user.id,
+                        email: user.email,
+                        studentId: user.id,
+                        name: user.name,
+                    };
+                }
+            }
+            catch (error) {
+                throw new customErrors_1.AuthenticationError("Invalid or Token expired");
+            }
         });
     }
 }

@@ -73,6 +73,34 @@ class AuthRepository {
             }
         });
     }
+    findById(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var _a, _b, _c, _d, _e;
+            try {
+                const user = yield this.prisma.user.findUnique({
+                    where: {
+                        id
+                    }
+                });
+                if (!user) {
+                    return null;
+                }
+                return {
+                    id: (_a = user === null || user === void 0 ? void 0 : user.id) !== null && _a !== void 0 ? _a : "",
+                    name: (_b = user === null || user === void 0 ? void 0 : user.name) !== null && _b !== void 0 ? _b : "",
+                    studentId: (_c = user === null || user === void 0 ? void 0 : user.studentId) !== null && _c !== void 0 ? _c : "",
+                    email: (_d = user === null || user === void 0 ? void 0 : user.email) !== null && _d !== void 0 ? _d : "",
+                    password: (_e = user === null || user === void 0 ? void 0 : user.password) !== null && _e !== void 0 ? _e : ""
+                };
+            }
+            catch (error) {
+                if (error instanceof library_1.PrismaClientKnownRequestError) {
+                    throw new customErrors_1.DatabaseError("Failed to find user ID at findById method");
+                }
+                throw error;
+            }
+        });
+    }
     findByStudentId(studentId) {
         return __awaiter(this, void 0, void 0, function* () {
             var _a, _b, _c, _d, _e;

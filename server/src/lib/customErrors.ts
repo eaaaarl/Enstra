@@ -17,3 +17,9 @@ export class DatabaseError extends CustomError {
         super(message, 500);
     }
 }
+
+export class AuthenticationError extends CustomError {
+    constructor(message: string = 'Authentication failed') {
+        super(message, 401);
+    }
+}
