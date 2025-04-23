@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DatabaseError = exports.ValidationError = exports.CustomError = void 0;
+exports.AuthenticationError = exports.DatabaseError = exports.ValidationError = exports.CustomError = void 0;
 class CustomError extends Error {
     constructor(message, statusCode) {
         super(message);
@@ -21,3 +21,9 @@ class DatabaseError extends CustomError {
     }
 }
 exports.DatabaseError = DatabaseError;
+class AuthenticationError extends CustomError {
+    constructor(message = 'Authentication failed') {
+        super(message, 401);
+    }
+}
+exports.AuthenticationError = AuthenticationError;

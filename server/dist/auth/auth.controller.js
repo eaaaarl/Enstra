@@ -10,10 +10,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
+const generateTokenAndCookies_1 = require("../lib/generateTokenAndCookies");
 class AuthController {
     constructor(authService) {
         this.authService = authService;
         this.signUp = this.signUp.bind(this);
+        this.signIn = this.signIn.bind(this);
     }
     signUp(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -23,6 +25,22 @@ class AuthController {
                 res.status(201).json({
                     message: "User created successfully",
                     data: newUser
+                });
+            }
+            catch (error) {
+                next(error);
+            }
+        });
+    }
+    signIn(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const payload = req.body;
+                const user = yield this.authService.signIn(payload);
+                (0, generateTokenAndCookies_1.generateTokenAndSetCookie)(user.id, req, res);
+                res.status(200).json({
+                    message: "User logged in successfully",
+                    data: user
                 });
             }
             catch (error) {

@@ -1,8 +1,9 @@
-import { passwordHash } from "../../../lib/bcrypt";
-import { ValidationError } from "../../../lib/customErrors";
-import { signUpData } from "../entity/auth";
+import { passwordCompare, passwordHash } from "../../../lib/bcrypt";
+import { AuthenticationError, ValidationError } from "../../../lib/customErrors";
+import { verifyToken } from "../../../lib/verifyToken";
+import { signInData, signUpData } from "../entity/auth";
 import { IAuthRepository } from "../interface/IAuth.repository";
-import { userSchema } from "../schema/auth";
+import { signInSchema, userSchema } from "../schema/auth";
 
 
 
@@ -35,4 +36,36 @@ export class AuthService {
 
         return newUser;
    }
+
+   async signIn(signInData: signInData) {
+        const { email, password } = signInSchema.parse(signInData);
+        const user = await this.authRespository.findByEmail(email);
+        if (!user) {
+            throw new ValidationError("Email or password is incorrect");
+        }
+
+        const isValidPassword = passwordCompare(password, user.password );
+        if (!isValidPassword) {
+            throw new ValidationError("Email or password is incorrect");
+        }
+
+       return user;
+    }
+
+   async validateToken(token: string) {
+    try {
+      const decoded = verifyToken(token);
+      const user = await this.authRespository.findById(decoded.userId);
+      if (user) {
+        return {
+          id: user.id,
+          email: user.email,
+          studentId: user.id,
+          name: user.name,
+        };
+      }
+    } catch (error) {
+      throw new AuthenticationError("Invalid or Token expired");
+    }
+  }
 }
