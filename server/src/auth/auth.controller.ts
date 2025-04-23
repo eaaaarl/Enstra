@@ -8,6 +8,7 @@ export class AuthController {
     constructor(private readonly authService: AuthService) {
         this.signUp = this.signUp.bind(this)
         this.signIn = this.signIn.bind(this)
+        this.logout = this.logout.bind(this)
     }
 
     async signUp(req:Request, res: Response, next: NextFunction) {
@@ -37,5 +38,16 @@ export class AuthController {
         } catch (error) {
             next(error)
         }
+    }
+
+    async logout(req:Request, res: Response, next: NextFunction) {
+        try {
+            res.cookie("jwt", "", { maxAge: 0 });
+            res
+              .status(200)
+              .json({ message: "You have been logged out successfully" });
+          } catch (error) {
+            next(error);
+          }
     }
 }   
