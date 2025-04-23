@@ -1,6 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm } from "react-hook-form";
 import { signInSchema, signInValues } from "../schema/signin";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useSignInMutation } from "../api/authApi";
+import { useAppDispatch } from "@/lib/redux/hooks";
+import { setUser } from "@/lib/redux/state/authSlice";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export const useLoginForm = () => {
   const form = useForm({
@@ -11,8 +17,25 @@ export const useLoginForm = () => {
     },
   });
 
-  const callSignIn = (payload: signInValues) => {
-    console.log(payload);
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const [signIn, { isLoading }] = useSignInMutation();
+
+  const callSignIn = async (payload: signInValues) => {
+    try {
+      const res = await signIn(payload).unwrap();
+      const authUser = res.data;
+
+      dispatch(setUser(authUser));
+      toast.success(res.message);
+      form.reset();
+
+      router.push("/dashboard");
+    } catch (error: any) {
+      toast.error(
+        error?.data?.message || "Failed to sign in, pleast try again."
+      );
+    }
   };
 
   const handleSubmit = (payload: signInValues) => {
@@ -22,5 +45,6 @@ export const useLoginForm = () => {
   return {
     form,
     handleSubmit,
+    isLoading,
   };
 };

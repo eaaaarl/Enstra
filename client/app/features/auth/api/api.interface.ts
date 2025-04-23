@@ -7,7 +7,7 @@ export interface User {
 
 export interface SignUpResponse {
   message: string;
-  user: User;
+  data: User;
 }
 
 export interface SignUpPayload {
@@ -15,4 +15,14 @@ export interface SignUpPayload {
   studentId: string;
   email: string;
   password: string;
+}
+
+export interface SignInPayload {
+  email: string;
+  password: string;
+}
+
+export interface SignInResponse {
+  message: string;
+  data: User;
 }
