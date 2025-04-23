@@ -1,5 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { SignUpPayload, SignUpResponse } from "./api.interface";
+import {
+  SignInPayload,
+  SignInResponse,
+  SignUpPayload,
+  SignUpResponse,
+} from "./api.interface";
 
 const BASE_URL = "http://localhost:3001/api";
 
@@ -19,7 +24,14 @@ export const authApi = createApi({
         body: payload,
       }),
     }),
+    signIn: build.mutation<SignInResponse, SignInPayload>({
+      query: (payload) => ({
+        url: "/signin",
+        method: "POST",
+        body: payload,
+      }),
+    }),
   }),
 });
 
-export const { useSignUpMutation } = authApi;
+export const { useSignUpMutation, useSignInMutation } = authApi;

@@ -49,7 +49,12 @@ export class AuthService {
             throw new ValidationError("Email or password is incorrect");
         }
 
-       return user;
+       return {
+        id: user.id,
+        name:user.name,
+        studentId: user.studentId,
+        email: user.email,
+       };
     }
 
    async validateToken(token: string) {

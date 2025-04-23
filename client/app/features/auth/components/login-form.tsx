@@ -14,12 +14,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import Link from "next/link";
+import { Loader2 } from "lucide-react";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"form">) {
-  const { form, handleSubmit } = useLoginForm();
+  const { form, handleSubmit, isLoading } = useLoginForm();
   return (
     <Form {...form}>
       <form
@@ -73,7 +74,11 @@ export function LoginForm({
             />
           </div>
           <Button type="submit" className="w-full">
-            Login
+            {isLoading ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              "Sign In"
+            )}
           </Button>
           <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
             <span className="relative z-10 bg-background px-2 text-muted-foreground">
