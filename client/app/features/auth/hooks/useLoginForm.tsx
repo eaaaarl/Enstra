@@ -30,7 +30,7 @@ export const useLoginForm = () => {
       toast.success(res.message);
       form.reset();
 
-      router.push("/dashboard");
+      router.push("/form");
     } catch (error: any) {
       toast.error(
         error?.data?.message || "Failed to sign in, pleast try again."
