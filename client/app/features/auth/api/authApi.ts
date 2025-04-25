@@ -1,10 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import {
+  CheckAuthResponse,
   SignInPayload,
   SignInResponse,
   SignUpPayload,
   SignUpResponse,
 } from "./api.interface";
+import { toast } from "sonner";
 
 const BASE_URL = "http://localhost:3001/api";
 
@@ -15,7 +17,17 @@ const customBaseQuery = fetchBaseQuery({
 
 export const authApi = createApi({
   reducerPath: "authApi",
-  baseQuery: customBaseQuery,
+  baseQuery: async (args, api, extraOptions) => {
+    const result = await customBaseQuery(args, api, extraOptions);
+
+    if (result.error && result.error.status === 401) {
+      console.log("401 Error - Token expired or invalid:", result.error);
+
+      toast.error("Session expired. Please log in again.");
+      return { error: result.error };
+    }
+    return result;
+  },
   endpoints: (build) => ({
     signUp: build.mutation<SignUpResponse, SignUpPayload>({
       query: (payload) => ({
@@ -37,8 +49,18 @@ export const authApi = createApi({
         method: "POST",
       }),
     }),
+    checkAuth: build.query<CheckAuthResponse, void>({
+      query: () => ({
+        url: "/me",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useSignUpMutation, useSignInMutation, useSignOutMutation } =
-  authApi;
+export const {
+  useSignUpMutation,
+  useSignInMutation,
+  useSignOutMutation,
+  useCheckAuthQuery,
+} = authApi;

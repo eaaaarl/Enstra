@@ -26,3 +26,8 @@ export interface SignInResponse {
   message: string;
   data: User;
 }
+
+export interface CheckAuthResponse {
+  message: string;
+  data: User;
+}
