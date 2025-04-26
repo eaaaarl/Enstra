@@ -20,7 +20,7 @@ export const useCwtsForm = () => {
       fathers_name: "",
       fathers_occupation: "",
       firstname: "",
-      gender: "",
+      gender: undefined,
       grade: "",
       height: "",
       lastname: "",
