@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface UserState {
+  initials: ReactNode;
   id: string;
   name: string;
   email: string;

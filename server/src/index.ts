@@ -8,6 +8,7 @@ import helmet from "helmet";
 
 import authRoute from "./auth/auth.route";
 import { errorHandler } from "./middleware/errorHandler";
+import { studentRoute } from "./student/student.route";
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.get("/", (req, res) => {
 });
 
 app.use('/api/auth', authRoute)
+app.use('/api/student', studentRoute)
 
 //ERROR HANDLER
 app.use(errorHandler);
