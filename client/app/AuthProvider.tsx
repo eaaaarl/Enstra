@@ -5,19 +5,24 @@ import { useCheckAuthQuery } from "./features/auth/api/authApi";
 import { useAppDispatch } from "@/lib/redux/hooks";
 import { clearUser, setUser } from "@/lib/redux/state/authSlice";
 
-function AuthProvider({ children }: { children: React.ReactNode }) {
-  const { data, error, isLoading } = useCheckAuthQuery();
+interface AuthProviderProps {
+  children: React.ReactNode;
+}
+
+function AuthProvider({ children }: AuthProviderProps) {
+  const { data, error } = useCheckAuthQuery();
   const dispatch = useAppDispatch();
-  console.log("AuthProvider", data);
+
   useEffect(() => {
     if (data?.data) {
-      dispatch(setUser(data.data));
+      const { id, email, name, studentId } = data.data;
+      dispatch(setUser({ id, email, name, studentId }));
     } else if (error) {
       dispatch(clearUser());
     }
-  }, [dispatch, data, error]);
+  }, [data, error, dispatch]);
 
-  return <>{isLoading ? null : children}</>;
+  return <>{children}</>;
 }
 
 export default AuthProvider;

@@ -25,7 +25,6 @@ export const useLoginForm = () => {
     try {
       const res = await signIn(payload).unwrap();
       const authUser = res.data;
-      console.log("USER FROM THE SERVER", authUser);
       dispatch(
         setUser({
           id: authUser.id,

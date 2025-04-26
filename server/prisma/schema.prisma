@@ -15,11 +15,55 @@ datasource db {
 }
 
 model User {
-  id           String  @id @default(uuid())
-  email        String  @unique
+  id           String    @id @default(uuid())
+  email        String    @unique
   password     String
-  studentId    String? @unique
+  studentId    String?   @unique
   name         String?
   avatar       String?
   refreshToken String?
+  Student      Student[]
+}
+
+model Student {
+  id                     String   @id @default(uuid())
+  student_id             String   @unique
+  lastname               String
+  firstname              String
+  middlename             String?
+  suffix                 String?
+  gender                 String
+  date_birth             DateTime
+  place_birth            String
+  phone_number           String
+  email                  String   @unique
+  department             String
+  course                 String
+  school                 String
+  religion               String?
+  weight                 String?
+  height                 String?
+  complexion             String?
+  blood_type             String?
+  street_address         String
+  city                   String
+  state_province         String
+  postal_code            String
+  mothers_name           String
+  mothers_occupation     String?
+  fathers_name           String
+  fathers_occupation     String?
+  emergency_name         String
+  emergency_relationship String
+  emergency_address      String
+  emergency_phonenumber  String
+  semester               String
+  school_year            String
+  grade                  String?
+  remarks                String?
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
