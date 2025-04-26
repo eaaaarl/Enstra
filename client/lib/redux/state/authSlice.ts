@@ -5,6 +5,7 @@ export interface UserState {
   name: string;
   email: string;
   studentId: string;
+  avatarUrl?: string;
 }
 
 const initialState: UserState = {
@@ -23,12 +24,14 @@ export const authSlice = createSlice({
       state.email = action.payload.email;
       state.name = action.payload.name;
       state.studentId = action.payload.studentId;
+      state.avatarUrl = action.payload.avatarUrl;
     },
     clearUser: (state) => {
       state.id = "";
       state.email = "";
       state.name = "";
       state.studentId = "";
+      state.avatarUrl = "";
     },
   },
 });

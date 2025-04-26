@@ -127,6 +127,47 @@ exports.Prisma.UserScalarFieldEnum = {
   refreshToken: 'refreshToken'
 };
 
+exports.Prisma.StudentScalarFieldEnum = {
+  id: 'id',
+  student_id: 'student_id',
+  lastname: 'lastname',
+  firstname: 'firstname',
+  middlename: 'middlename',
+  suffix: 'suffix',
+  gender: 'gender',
+  date_birth: 'date_birth',
+  place_birth: 'place_birth',
+  phone_number: 'phone_number',
+  email: 'email',
+  department: 'department',
+  course: 'course',
+  school: 'school',
+  religion: 'religion',
+  weight: 'weight',
+  height: 'height',
+  complexion: 'complexion',
+  blood_type: 'blood_type',
+  street_address: 'street_address',
+  city: 'city',
+  state_province: 'state_province',
+  postal_code: 'postal_code',
+  mothers_name: 'mothers_name',
+  mothers_occupation: 'mothers_occupation',
+  fathers_name: 'fathers_name',
+  fathers_occupation: 'fathers_occupation',
+  emergency_name: 'emergency_name',
+  emergency_relationship: 'emergency_relationship',
+  emergency_address: 'emergency_address',
+  emergency_phonenumber: 'emergency_phonenumber',
+  semester: 'semester',
+  school_year: 'school_year',
+  grade: 'grade',
+  remarks: 'remarks',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -144,7 +185,8 @@ exports.Prisma.NullsOrder = {
 
 
 exports.Prisma.ModelName = {
-  User: 'User'
+  User: 'User',
+  Student: 'Student'
 };
 
 /**

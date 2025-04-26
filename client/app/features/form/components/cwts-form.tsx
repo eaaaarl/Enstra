@@ -25,6 +25,7 @@ import { Button } from "@/components/ui/button";
 import { SelectProvince } from "./SelectComponents/SelectProvince";
 import { SelectCitiesMunicipalities } from "./SelectComponents/SelectCitiesMunicipality";
 import { SelectBarangays } from "./SelectComponents/SelectBarangays";
+import Link from "next/link";
 
 function CwtsForm() {
   const { form, handleSubmit } = useCwtsForm();
@@ -731,8 +732,14 @@ function CwtsForm() {
             </div>
           </div>
         </div>
-
-        <Button>Submit</Button>
+        <div className="gap-2 flex justify-between">
+          <Link href={"/home"}>
+            <Button variant={"outline"}>Back</Button>
+          </Link>
+          <Button className="bg-blue-500 text-white hover:bg-blue-400">
+            Submit
+          </Button>
+        </div>
       </form>
     </Form>
   );
