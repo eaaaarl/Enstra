@@ -23,9 +23,7 @@ function CwtsPage() {
               Reminders: PLEASE ENTER VALID AND ACCURATE DATA.
             </AlertDescription>
           </Alert>
-          {/* Form Cwts Components */}
           <CwtsForm />
-          {/* Form Cwts Components */}
         </CardContent>
       </Card>
     </div>

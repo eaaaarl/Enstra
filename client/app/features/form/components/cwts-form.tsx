@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { useCwtsForm } from "../hooks/useCwtsForm";
 import { Input } from "@/components/ui/input";
@@ -19,9 +21,14 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
+import { usePsgcApi } from "../hooks/usePsgcApi";
+import { Loader2 } from "lucide-react";
+import { SelectProvince } from "./SelectComponents/SelectProvince";
 
 function CwtsForm() {
   const { form, handleSubmit } = useCwtsForm();
+  const { provinceData, isLoadingProvince } = usePsgcApi();
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
@@ -33,7 +40,7 @@ function CwtsForm() {
               <FormField
                 control={form.control}
                 name="student_id"
-                render={(field) => (
+                render={({ field }) => (
                   <FormItem>
                     <Label htmlFor="student_id">Student ID</Label>
                     <FormControl>
@@ -57,7 +64,7 @@ function CwtsForm() {
               <FormField
                 control={form.control}
                 name="lastname"
-                render={(field) => (
+                render={({ field }) => (
                   <FormItem>
                     <Label htmlFor="lastname">Lastname</Label>
                     <FormControl>
@@ -72,7 +79,7 @@ function CwtsForm() {
               <FormField
                 control={form.control}
                 name="firstname"
-                render={(field) => (
+                render={({ field }) => (
                   <FormItem>
                     <Label htmlFor="firstname">Firstname</Label>
                     <FormControl>
@@ -87,7 +94,7 @@ function CwtsForm() {
               <FormField
                 control={form.control}
                 name="middlename"
-                render={(field) => (
+                render={({ field }) => (
                   <FormItem>
                     <Label htmlFor="middlename">Middlename</Label>
                     <FormControl>
@@ -102,7 +109,7 @@ function CwtsForm() {
               <FormField
                 control={form.control}
                 name="suffix"
-                render={(field) => (
+                render={({ field }) => (
                   <FormItem>
                     <Label htmlFor="suffix">Suffix</Label>
                     <FormControl>
@@ -156,7 +163,7 @@ function CwtsForm() {
               <FormField
                 control={form.control}
                 name="date_birth"
-                render={(field) => (
+                render={({ field }) => (
                   <FormItem>
                     <Label htmlFor="date_birth">Date Birth</Label>
                     <FormControl>
@@ -174,7 +181,7 @@ function CwtsForm() {
               <FormField
                 control={form.control}
                 name="place_birth"
-                render={(field) => (
+                render={({ field }) => (
                   <FormItem>
                     <Label htmlFor="place_birth">Place Birth</Label>
                     <FormControl>
@@ -441,9 +448,12 @@ function CwtsForm() {
                 name="state_province"
                 render={({ field }) => (
                   <FormItem>
-                    <Label htmlFor="state_province">State Province</Label>
+                    <Label>State Province</Label>
                     <FormControl>
-                      <Input id="state_province" {...field} />
+                      <SelectProvince
+                        onChange={field.onChange}
+                        value={field.value}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -637,7 +647,21 @@ function CwtsForm() {
                   <FormItem>
                     <Label htmlFor="semester">Semester</Label>
                     <FormControl>
-                      <Input id="semester" {...field} />
+                      <Select
+                        value={field.value}
+                        onValueChange={field.onChange}
+                      >
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Select Semester" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {["1st", "2nd"].map((sem) => (
+                            <SelectGroup key={sem}>
+                              <SelectItem value={sem}>{sem}</SelectItem>
+                            </SelectGroup>
+                          ))}
+                        </SelectContent>
+                      </Select>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -694,6 +718,8 @@ function CwtsForm() {
             </div>
           </div>
         </div>
+
+        <Button>Submit</Button>
       </form>
     </Form>
   );
