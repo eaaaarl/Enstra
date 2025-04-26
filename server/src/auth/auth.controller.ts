@@ -54,6 +54,7 @@ export class AuthController {
     async me(req: CustomRequest, res: Response,next:NextFunction) {
         try {
           if (req.user) {
+            console.log('server me ',req.user);
             res.status(200).json({
               message: "Protected profile data retrieved successfully",
               data: req.user,

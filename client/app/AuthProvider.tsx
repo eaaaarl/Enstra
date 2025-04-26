@@ -8,6 +8,7 @@ import { clearUser, setUser } from "@/lib/redux/state/authSlice";
 function AuthProvider({ children }: { children: React.ReactNode }) {
   const { data, error, isLoading } = useCheckAuthQuery();
   const dispatch = useAppDispatch();
+  console.log("AuthProvider", data);
   useEffect(() => {
     if (data?.data) {
       dispatch(setUser(data.data));
