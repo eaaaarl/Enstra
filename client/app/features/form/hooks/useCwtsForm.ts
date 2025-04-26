@@ -1,6 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { cwtsPayload, cwtsSchema } from "../schema/cwts.schema";
+import { useEffect } from "react";
+import { useAppSelector } from "@/lib/redux/hooks";
 
 export const useCwtsForm = () => {
   const form = useForm({
@@ -42,6 +44,13 @@ export const useCwtsForm = () => {
       weight: "",
     },
   });
+
+  const authUser = useAppSelector((state) => state.user);
+  useEffect(() => {
+    if (authUser) {
+      form.setValue("student_id", authUser.studentId as string);
+    }
+  }, [authUser, form]);
 
   const callSubmitCwtsForm = (payload: cwtsPayload) => {
     console.log("Submitted CWTS Form Data:", payload);

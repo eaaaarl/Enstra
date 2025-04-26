@@ -4,7 +4,7 @@ export interface UserState {
   id: string;
   name: string;
   email: string;
-  studentId: string | null;
+  studentId: string;
 }
 
 const initialState: UserState = {
