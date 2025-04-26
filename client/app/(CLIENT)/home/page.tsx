@@ -1,6 +1,4 @@
 "use client";
-
-import React from "react";
 import {
   Card,
   CardContent,
@@ -9,28 +7,31 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
 import { Separator } from "@/components/ui/separator";
-import { useHome } from "@/app/features/home/hooks/useHome";
 import HomeLayout from "@/app/features/home/components/layout/HomeLayout";
 import {
   ProgramSelectionForm,
   RegistrationActions,
-  RegistrationConfirmation,
 } from "@/app/features/home/components/ProgramSelectionForm";
+import ProgramSelectionConfirmation from "@/app/features/home/components/ProgramSelectionConfirmation";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 function HomePages() {
-  const {
-    handleSubmit,
-    isSubmitted,
-    setIsSubmitted,
-    setSelectedProgram,
-    selectedProgram,
-  } = useHome();
+  const router = useRouter();
+  const [selectedProgram, setSelectedProgram] = useState("");
 
-  const resetRegistration = () => {
-    setIsSubmitted(false);
-    setSelectedProgram("");
+  const [open, setIsOpen] = useState(false);
+  const handleOpenConfirmation = () => {
+    if (selectedProgram) {
+      setIsOpen(true);
+    }
+  };
+
+  const handleConfirmation = () => {
+    if (selectedProgram) {
+      router.push(`/${selectedProgram.toLowerCase()}`);
+    }
   };
   return (
     <HomeLayout>
@@ -43,30 +44,33 @@ function HomePages() {
             Please select one of the following programs
           </CardDescription>
         </CardHeader>
-
         <CardContent className="pt-6 px-8">
-          {!isSubmitted ? (
-            <ProgramSelectionForm
-              selectedProgram={selectedProgram}
-              setSelectedProgram={setSelectedProgram}
-              onSubmit={handleSubmit}
-            />
-          ) : (
-            <RegistrationConfirmation selectedProgram={selectedProgram} />
-          )}
+          <ProgramSelectionForm
+            selectedProgram={selectedProgram}
+            setSelectedProgram={setSelectedProgram}
+            onSubmit={handleOpenConfirmation}
+          />
         </CardContent>
-
         <Separator />
-
         <CardFooter className="flex justify-between py-5 px-8">
           <RegistrationActions
-            isSubmitted={isSubmitted}
-            selectedProgram={selectedProgram}
-            onSubmit={handleSubmit}
-            onReset={resetRegistration}
+            selectedProgram={!selectedProgram}
+            onSubmit={handleOpenConfirmation}
+            onReset={() => {}}
           />
         </CardFooter>
       </Card>
+
+      <ProgramSelectionConfirmation
+        selectedProgram={selectedProgram}
+        onOpenChange={handleOpenConfirmation}
+        open={open}
+        onCancel={() => {
+          setSelectedProgram("");
+          setIsOpen(false);
+        }}
+        onSubmit={handleConfirmation}
+      />
     </HomeLayout>
   );
 }
