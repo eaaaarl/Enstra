@@ -22,13 +22,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-import { usePsgcApi } from "../hooks/usePsgcApi";
-import { Loader2 } from "lucide-react";
 import { SelectProvince } from "./SelectComponents/SelectProvince";
+import { SelectCitiesMunicipalities } from "./SelectComponents/SelectCitiesMunicipality";
+import { SelectBarangays } from "./SelectComponents/SelectBarangays";
 
 function CwtsForm() {
   const { form, handleSubmit } = useCwtsForm();
-  const { provinceData, isLoadingProvince } = usePsgcApi();
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
@@ -417,7 +417,12 @@ function CwtsForm() {
                   <FormItem>
                     <Label htmlFor="street_address">Street Address</Label>
                     <FormControl>
-                      <Input id="street_address" {...field} />
+                      <SelectBarangays
+                        onChange={field.onChange}
+                        value={field.value}
+                        name={field.name}
+                        onBlur={field.onBlur}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -435,7 +440,12 @@ function CwtsForm() {
                   <FormItem>
                     <Label htmlFor="city">City</Label>
                     <FormControl>
-                      <Input id="city" {...field} />
+                      <SelectCitiesMunicipalities
+                        onChange={field.onChange}
+                        value={field.value}
+                        name={field.name}
+                        onBlur={field.onBlur}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -451,7 +461,10 @@ function CwtsForm() {
                     <Label>State Province</Label>
                     <FormControl>
                       <SelectProvince
-                        onChange={field.onChange}
+                        onChange={(provinceName) => {
+                          field.onChange(provinceName);
+                          form.setValue("city", "");
+                        }}
                         value={field.value}
                       />
                     </FormControl>

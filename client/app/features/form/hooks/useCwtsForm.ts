@@ -45,7 +45,6 @@ export const useCwtsForm = () => {
 
   const callSubmitCwtsForm = (payload: cwtsPayload) => {
     console.log("Submitted CWTS Form Data:", payload);
-    // Add your API call or form submission logic here
   };
 
   const handleSubmit = (payload: cwtsPayload) => {

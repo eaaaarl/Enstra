@@ -1,9 +1,16 @@
-import { authApi } from "@/app/features/auth/api/authApi";
 import { combineReducers } from "@reduxjs/toolkit";
-import { authReducer } from "./state/authSlice";
+
+// RTK Query API slices
 import { psgcApi } from "@/app/features/form/api/psgcApi";
+import { authApi } from "@/app/features/auth/api/authApi";
+
+// States Slices
+import { psgcReducer } from "./state/psgcSlice";
+import { authReducer } from "./state/authSlice";
+
 const rootReducer = combineReducers({
   user: authReducer,
+  psgc: psgcReducer,
 
   [authApi.reducerPath]: authApi.reducer,
   [psgcApi.reducerPath]: psgcApi.reducer,

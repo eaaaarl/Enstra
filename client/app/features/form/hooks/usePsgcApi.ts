@@ -7,6 +7,7 @@ export const usePsgcApi = () => {
     useGetProvinceQuery();
 
   return {
+    //Get Province
     provinceData,
     isLoadingProvince,
   };
