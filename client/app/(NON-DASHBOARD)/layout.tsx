@@ -10,7 +10,7 @@ function Layout({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (authUser.id) {
-      router.replace("/dashboard");
+      router.replace("/home");
     }
   }, [router, authUser]);
 

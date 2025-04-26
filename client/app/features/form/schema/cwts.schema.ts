@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const cwtsSchema = z.object({
+export const studentSchema = z.object({
   student_id: z.string().min(1, "Student ID is required"),
   lastname: z.string().min(1, "Last name is required"),
   firstname: z.string().min(1, "First name is required"),
@@ -39,4 +39,4 @@ export const cwtsSchema = z.object({
   remarks: z.string().optional(),
 });
 
-export type cwtsPayload = z.infer<typeof cwtsSchema>;
+export type studentPayload = z.infer<typeof studentSchema>;

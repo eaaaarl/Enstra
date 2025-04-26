@@ -26,9 +26,10 @@ import { SelectProvince } from "./SelectComponents/SelectProvince";
 import { SelectCitiesMunicipalities } from "./SelectComponents/SelectCitiesMunicipality";
 import { SelectBarangays } from "./SelectComponents/SelectBarangays";
 import Link from "next/link";
+import { Loader2 } from "lucide-react";
 
 function CwtsForm() {
-  const { form, handleSubmit } = useCwtsForm();
+  const { form, handleSubmit, isLoading } = useCwtsForm();
 
   return (
     <Form {...form}>
@@ -737,7 +738,11 @@ function CwtsForm() {
             <Button variant={"outline"}>Back</Button>
           </Link>
           <Button className="bg-blue-500 text-white hover:bg-blue-400">
-            Submit
+            {isLoading ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              "Submit"
+            )}
           </Button>
         </div>
       </form>

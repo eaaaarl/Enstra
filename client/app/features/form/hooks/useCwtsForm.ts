@@ -1,12 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { cwtsPayload, cwtsSchema } from "../schema/cwts.schema";
 import { useEffect } from "react";
 import { useAppSelector } from "@/lib/redux/hooks";
+import { studentPayload, studentSchema } from "../schema/cwts.schema";
+import { useCreateStudentCwtsMutation } from "../api/studentApi";
+import { toast } from "sonner";
 
 export const useCwtsForm = () => {
   const form = useForm({
-    resolver: zodResolver(cwtsSchema),
+    resolver: zodResolver(studentSchema),
     defaultValues: {
       blood_type: "",
       city: "",
@@ -52,16 +55,26 @@ export const useCwtsForm = () => {
     }
   }, [authUser, form]);
 
-  const callSubmitCwtsForm = (payload: cwtsPayload) => {
-    console.log("Submitted CWTS Form Data:", payload);
+  const [createStudentCwts, { isLoading }] = useCreateStudentCwtsMutation();
+
+  const callSubmitCwtsForm = async (payload: studentPayload) => {
+    try {
+      const res = await createStudentCwts(payload).unwrap();
+      console.log("res:", res);
+      form.reset();
+      toast.success(res.message);
+    } catch (error: any) {
+      toast.error(error?.data?.message || "Failed to create, please try again");
+    }
   };
 
-  const handleSubmit = (payload: cwtsPayload) => {
+  const handleSubmit = (payload: studentPayload) => {
     callSubmitCwtsForm(payload);
   };
 
   return {
     form,
     handleSubmit,
+    isLoading,
   };
 };

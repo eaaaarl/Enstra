@@ -9,10 +9,12 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LogOut, Settings, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLogout } from "@/app/features/auth/hooks/useLogout";
 import { useAppSelector } from "@/lib/redux/hooks";
 
 function UserDropdown() {
   const authUser = useAppSelector((state) => state.user);
+  const { handleSubmit } = useLogout();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -47,7 +49,7 @@ function UserDropdown() {
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem
-          onClick={() => {}}
+          onClick={handleSubmit}
           className="cursor-pointer text-red-500"
         >
           <LogOut className="mr-2 h-4 w-4" />

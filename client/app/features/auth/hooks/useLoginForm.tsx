@@ -36,8 +36,8 @@ export const useLoginForm = () => {
 
       toast.success(res.message);
       form.reset();
-
-      router.push("/form");
+      console.log("Navigating to /home");
+      router.push("/home");
     } catch (error: any) {
       toast.error(
         error?.data?.message || "Failed to sign in, pleast try again."
