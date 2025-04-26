@@ -35,7 +35,7 @@ const storage =
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: apiReducerPaths,
+  blacklist: ["psgc", ...apiReducerPaths],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

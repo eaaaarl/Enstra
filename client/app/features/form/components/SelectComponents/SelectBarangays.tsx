@@ -16,19 +16,34 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { usePsgcApi } from "../../hooks/usePsgcApi";
-import { useAppDispatch } from "@/lib/redux/hooks";
-import { setSelectedProvinceCode } from "@/lib/redux/state/psgcSlice";
+import { useGetBarangaysQuery } from "../../api/psgcApi";
+import { useAppSelector } from "@/lib/redux/hooks";
 
-interface SelectProvinceProps {
+interface SelectBarangaysProps {
   value: string;
   onChange: (value: string) => void;
+  onBlur?: () => void;
+  name?: string;
 }
 
-export function SelectProvince({ value, onChange }: SelectProvinceProps) {
-  const { provinceData } = usePsgcApi();
+export function SelectBarangays({
+  value,
+  onChange,
+  name,
+  onBlur,
+}: SelectBarangaysProps) {
   const [open, setOpen] = React.useState(false);
-  const dispatch = useAppDispatch();
+
+  const selectedCityCode = useAppSelector(
+    (state) => state.psgc.selectedCityCode
+  );
+  const { data: barangays, isLoading: isLoadingBarangays } =
+    useGetBarangaysQuery(selectedCityCode, {
+      skip: !selectedCityCode,
+    });
+
+  console.log("selectedCityCode", selectedCityCode);
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -37,41 +52,41 @@ export function SelectProvince({ value, onChange }: SelectProvinceProps) {
           role="combobox"
           aria-expanded={open}
           className="w-full justify-between"
+          name={name}
+          onBlur={onBlur}
+          type="button"
+          disabled={!barangays || isLoadingBarangays}
         >
           {value
-            ? provinceData?.find((prov) => prov.name === value)?.name
-            : "Select Province..."}
+            ? barangays?.find((br) => br.name === value)?.name
+            : selectedCityCode
+            ? isLoadingBarangays
+              ? "Loading..."
+              : "Select Barangays..."
+            : "Select City/Municipal First..."}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-full p-0" align="start" sideOffset={4}>
         <Command>
-          <CommandInput placeholder="Search province..." className="h-9" />
+          <CommandInput placeholder="Search barangays..." className="h-9" />
           <CommandList>
-            <CommandEmpty>No province found.</CommandEmpty>
+            <CommandEmpty>No barangays found.</CommandEmpty>
             <CommandGroup>
-              {provinceData?.map((prov) => (
+              {barangays?.map((br) => (
                 <CommandItem
-                  key={prov.code}
-                  value={prov.name}
+                  key={br.code}
+                  value={br.name}
                   onSelect={(currentValue) => {
-                    const newValue = currentValue === value ? "" : currentValue;
-                    onChange(newValue);
-
-                    const selectedProvinceCode = provinceData?.find(
-                      (province) => province.name === newValue
-                    )?.code;
-
-                    dispatch(setSelectedProvinceCode(selectedProvinceCode));
-
+                    onChange(currentValue === value ? "" : currentValue);
                     setOpen(false);
                   }}
                 >
-                  {prov.name}
+                  {br.name}
                   <Check
                     className={cn(
                       "ml-auto",
-                      value === prov.name ? "opacity-100" : "opacity-0"
+                      value === br.name ? "opacity-100" : "opacity-0"
                     )}
                   />
                 </CommandItem>
