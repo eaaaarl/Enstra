@@ -15,7 +15,10 @@ export function ProgramOption({ id, title, description }: ProgramOptionProps) {
   return (
     <div className="flex items-start space-x-3 rounded-md border p-5 hover:bg-slate-50 transition-colors">
       <RadioGroupItem value={id} id={id} className="mt-1" />
-      <Label htmlFor={id} className="flex-1 cursor-pointer">
+      <Label
+        htmlFor={id}
+        className="flex flex-col items-start flex-1 cursor-pointer"
+      >
         <div className="font-semibold text-lg">{title}</div>
         <div className="text-slate-600 mt-1">{description}</div>
       </Label>
@@ -86,66 +89,25 @@ export function ProgramSelectionForm({
   );
 }
 
-interface RegistrationConfirmationProps {
-  selectedProgram: string;
-}
-
-export function RegistrationConfirmation({
-  selectedProgram,
-}: RegistrationConfirmationProps) {
-  return (
-    <div className="space-y-5">
-      <Alert className="bg-green-50 text-green-800 border-green-200 p-4">
-        <AlertDescription>
-          You have successfully registered for {selectedProgram}. Please check
-          your student portal for schedule and additional requirements.
-        </AlertDescription>
-      </Alert>
-
-      <div className="rounded-md border p-5 bg-slate-50">
-        <h3 className="font-medium">Program Selected: {selectedProgram}</h3>
-        <p className="text-slate-600 mt-2">
-          Registration Date: {new Date().toLocaleDateString()}
-        </p>
-      </div>
-    </div>
-  );
-}
-
 interface RegistrationActionsProps {
-  isSubmitted: boolean;
-  selectedProgram: string;
-  onSubmit: (e: React.FormEvent) => void;
-  onReset: (e: React.FormEvent) => void;
+  onSubmit: () => void;
+  onReset: () => void;
+  selectedProgram: boolean;
 }
 
 export function RegistrationActions({
-  isSubmitted,
-  selectedProgram,
   onSubmit,
   onReset,
+  selectedProgram,
 }: RegistrationActionsProps) {
-  if (!isSubmitted) {
-    return (
-      <div className="flex justify-between w-full">
-        <Button variant="outline" type="button" className="px-5">
-          Cancel
-        </Button>
-        <Button
-          type="submit"
-          disabled={!selectedProgram}
-          onClick={onSubmit}
-          className="px-6"
-        >
-          Proceed to Registration
-        </Button>
-      </div>
-    );
-  }
-
   return (
-    <Button onClick={onReset} className="w-full">
-      Register Another Program
-    </Button>
+    <div className="flex justify-between w-full">
+      <Button variant="outline" onClick={onReset} className="px-5">
+        Back to Selection
+      </Button>
+      <Button onClick={onSubmit} disabled={selectedProgram} className="px-6">
+        Confirm Registration
+      </Button>
+    </div>
   );
 }

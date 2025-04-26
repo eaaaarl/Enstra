@@ -4,26 +4,27 @@ import { useState } from "react";
 export const useHome = () => {
   const router = useRouter();
   const [selectedProgram, setSelectedProgram] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isOpenConfirmation, setIsOpenConfirmation] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleShowConfirmation = () => {
+    setIsOpenConfirmation(true);
+  };
+
+  const handleConfirmationSubmit = () => {
     if (selectedProgram) {
       router.push(`/${selectedProgram.toLowerCase()}`);
     }
   };
 
-  const handleLogout = () => {
-    router.push("/login");
-  };
-
   return {
-    handleSubmit,
-    handleLogout,
-
+    // States
     selectedProgram,
     setSelectedProgram,
-    isSubmitted,
-    setIsSubmitted,
+    isOpenConfirmation,
+    setIsOpenConfirmation,
+
+    // Handler
+    handleShowConfirmation,
+    handleConfirmationSubmit,
   };
 };
