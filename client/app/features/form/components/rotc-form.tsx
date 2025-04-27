@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { useCwtsForm } from "../hooks/useCwtsForm";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -17,6 +16,7 @@ import { Separator } from "@/components/ui/separator";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormMessage,
@@ -27,14 +27,13 @@ import { SelectCitiesMunicipalities } from "./SelectComponents/SelectCitiesMunic
 import { SelectBarangays } from "./SelectComponents/SelectBarangays";
 import Link from "next/link";
 import { Loader2 } from "lucide-react";
+import { useRotcForm } from "../hooks/useRotcForm";
 
-function CwtsForm() {
-  const { form, handleSubmit, isLoading } = useCwtsForm();
-
+export default function RotcForm() {
+  const { form, handleSubmit, isLoading } = useRotcForm();
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
-        {/* Student ID Section */}
         <div className="mb-8">
           <h3 className="text-lg font-medium mb-4">Student ID</h3>
           <div className="grid grid-cols-1 gap-4">
@@ -48,6 +47,39 @@ function CwtsForm() {
                     <FormControl>
                       <Input id="student_id" {...field} />
                     </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+
+            {/* Medical Certificate Upload Field */}
+            <div className="space-y-2">
+              <FormField
+                control={form.control}
+                name="medical_certificate"
+                render={({ field }) => (
+                  <FormItem>
+                    <Label htmlFor="medical_certificate">
+                      Medical Certificate
+                    </Label>
+                    <FormControl>
+                      <div className="flex items-center gap-2">
+                        <Input
+                          id="medical_certificate"
+                          type="file"
+                          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-foreground file:text-sm file:font-medium"
+                          accept=".pdf,.jpg,.jpeg,.png"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            field.onChange(file);
+                          }}
+                        />
+                      </div>
+                    </FormControl>
+                    <FormDescription>
+                      Upload your medical certificate (PDF, JPG, JPEG, or PNG)
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -178,6 +210,7 @@ function CwtsForm() {
                             : ""
                         }
                         onChange={(e) => {
+                          // This will create a proper Date object from the input value
                           field.onChange(
                             e.target.value ? new Date(e.target.value) : null
                           );
@@ -762,5 +795,3 @@ function CwtsForm() {
     </Form>
   );
 }
-
-export default CwtsForm;

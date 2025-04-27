@@ -33,6 +33,7 @@ function HomePages() {
       router.push(`/${selectedProgram.toLowerCase()}`);
     }
   };
+
   return (
     <HomeLayout>
       <Card className="w-full max-w-3xl shadow-lg">
@@ -56,7 +57,6 @@ function HomePages() {
           <RegistrationActions
             selectedProgram={!selectedProgram}
             onSubmit={handleOpenConfirmation}
-            onReset={() => {}}
           />
         </CardFooter>
       </Card>

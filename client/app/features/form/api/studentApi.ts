@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { studentPayload } from "../schema/cwts.schema";
+import { studentPayload } from "../schema/students.schema";
 
 const BASE_URL = "http://localhost:3001/api";
 
