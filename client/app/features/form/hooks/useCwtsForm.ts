@@ -15,7 +15,7 @@ export const useCwtsForm = () => {
       city: "",
       complexion: "",
       course: "",
-      date_birth: "",
+      date_birth: new Date(),
       department: "",
       email: "",
       emergency_address: "",
@@ -60,7 +60,6 @@ export const useCwtsForm = () => {
   const callSubmitCwtsForm = async (payload: studentPayload) => {
     try {
       const res = await createStudentCwts(payload).unwrap();
-      console.log("res:", res);
       form.reset();
       toast.success(res.message);
     } catch (error: any) {

@@ -16,7 +16,6 @@ import { Separator } from "@/components/ui/separator";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormMessage,
@@ -28,14 +27,16 @@ import { SelectBarangays } from "./SelectComponents/SelectBarangays";
 import Link from "next/link";
 import { Loader2 } from "lucide-react";
 import { useRotcForm } from "../hooks/useRotcForm";
+import { UploadBtn } from "@/lib/uploadthing";
 
 export default function RotcForm() {
   const { form, handleSubmit, isLoading } = useRotcForm();
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
         <div className="mb-8">
-          <h3 className="text-lg font-medium mb-4">Student ID</h3>
+          <h3 className="text-lg font-medium mb-4">School Student ID</h3>
           <div className="grid grid-cols-1 gap-4">
             <div className="space-y-2">
               <FormField
@@ -52,39 +53,52 @@ export default function RotcForm() {
                 )}
               />
             </div>
+          </div>
+          <div className="grid grid-cols-1 gap-4">
+            <UploadBtn
+              endpoint="medicalCert"
+              onUploadBegin={() => {
+                console.log("onUploadbegin");
+              }}
+              onClientUploadComplete={(res) => {
+                console.log(
+                  "url image",
+                  res.map((file) => file.ufsUrl)
+                );
+                alert("Upload completed successfully!");
+              }}
+              onUploadError={(err) => {
+                alert(`Upload failed: ${err.message}`);
+              }}
+            />
+            {/* <input
+              ref={inputFileRef}
+              type="file"
+              accept="image/*"
+              onChange={handleImageSelection}
+              style={{ display: "none" }}
+            />
 
-            {/* Medical Certificate Upload Field */}
-            <div className="space-y-2">
-              <FormField
-                control={form.control}
-                name="medical_certificate"
-                render={({ field }) => (
-                  <FormItem>
-                    <Label htmlFor="medical_certificate">
-                      Medical Certificate
-                    </Label>
-                    <FormControl>
-                      <div className="flex items-center gap-2">
-                        <Input
-                          id="medical_certificate"
-                          type="file"
-                          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-foreground file:text-sm file:font-medium"
-                          accept=".pdf,.jpg,.jpeg,.png"
-                          onChange={(e) => {
-                            const file = e.target.files?.[0];
-                            field.onChange(file);
-                          }}
-                        />
-                      </div>
-                    </FormControl>
-                    <FormDescription>
-                      Upload your medical certificate (PDF, JPG, JPEG, or PNG)
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+            <Button
+              className="bg-blue-900 text-white px-4 py-2 rounded-lg mt-2"
+              type="button"
+              onClick={handleFileInputClick}
+            >
+              Take a Photo
+            </Button>
+
+            <div>
+              {selectedImage && (
+                <>
+                  <Image
+                    src={selectedImage}
+                    alt="Uploaded Image"
+                    height={100}
+                    width={100}
+                  />
+                </>
+              )}
+            </div> */}
           </div>
         </div>
 

@@ -1,43 +1,7 @@
 import { z } from "zod";
 
-const ACCEPTED_FILE_TYPES = [
-  "application/pdf",
-  "image/jpeg",
-  "image/jpg",
-  "image/png",
-];
-const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
-
-const fileSchema = z.object({
-  name: z.string(),
-  size: z.number().max(MAX_FILE_SIZE, "File size must be less than 5MB"),
-  type: z
-    .string()
-    .refine(
-      (type) => ACCEPTED_FILE_TYPES.includes(type),
-      "Only PDF, JPEG, JPG, and PNG files are accepted"
-    ),
-});
-
 export const studentSchema = z.object({
   student_id: z.string().min(1, "Student ID is required"),
-  medical_certificate: z
-    .any()
-    .refine(
-      (file) =>
-        !file ||
-        (file instanceof File &&
-          fileSchema.safeParse({
-            name: file.name,
-            size: file.size,
-            type: file.type,
-          }).success),
-      {
-        message:
-          "Invalid file. Please upload a PDF, JPEG, JPG, or PNG file under 5MB.",
-      }
-    )
-    .optional(),
   lastname: z.string().min(1, "Last name is required"),
   firstname: z.string().min(1, "First name is required"),
   middlename: z.string().optional(),

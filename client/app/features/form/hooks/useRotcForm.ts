@@ -1,18 +1,19 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { studentPayload, studentSchema } from "../schema/students.schema";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAppSelector } from "@/lib/redux/hooks";
 
 export const useRotcForm = () => {
+  const authUser = useAppSelector((state) => state.user);
   const form = useForm<studentPayload>({
     resolver: zodResolver(studentSchema),
     defaultValues: {
-      medical_certificate: undefined, // Initialize as undefined for file input
       blood_type: "",
       city: "",
       complexion: "",
       course: "",
-      date_birth: new Date(), // Now using Date object for consistency with schema
+      date_birth: new Date(),
       department: "",
       email: "",
       emergency_address: "",
@@ -44,6 +45,12 @@ export const useRotcForm = () => {
       weight: "",
     },
   });
+
+  useEffect(() => {
+    if (authUser.studentId) {
+      form.setValue("student_id", authUser.studentId);
+    }
+  }, [authUser, form]);
 
   const callSubmitRotcForm = async (payload: studentPayload) => {
     console.log(payload);
