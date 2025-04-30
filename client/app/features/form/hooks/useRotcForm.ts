@@ -1,14 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useEffect } from "react";
-import { useAppSelector } from "@/lib/redux/hooks";
 import { studentPayload, studentSchema } from "../schema/students.schema";
-import { useCreateStudentCwtsMutation } from "../api/studentApi";
-import { toast } from "sonner";
+import { useEffect, useState } from "react";
+import { useAppSelector } from "@/lib/redux/hooks";
 
-export const useCwtsForm = () => {
-  const form = useForm({
+export const useRotcForm = () => {
+  const authUser = useAppSelector((state) => state.user);
+  const form = useForm<studentPayload>({
     resolver: zodResolver(studentSchema),
     defaultValues: {
       blood_type: "",
@@ -48,28 +46,21 @@ export const useCwtsForm = () => {
     },
   });
 
-  const authUser = useAppSelector((state) => state.user);
   useEffect(() => {
-    if (authUser) {
-      form.setValue("student_id", authUser.studentId as string);
+    if (authUser.studentId) {
+      form.setValue("student_id", authUser.studentId);
     }
   }, [authUser, form]);
 
-  const [createStudentCwts, { isLoading }] = useCreateStudentCwtsMutation();
-
-  const callSubmitCwtsForm = async (payload: studentPayload) => {
-    try {
-      const res = await createStudentCwts(payload).unwrap();
-      form.reset();
-      toast.success(res.message);
-    } catch (error: any) {
-      toast.error(error?.data?.message || "Failed to create, please try again");
-    }
+  const callSubmitRotcForm = async (payload: studentPayload) => {
+    console.log(payload);
   };
 
   const handleSubmit = (payload: studentPayload) => {
-    callSubmitCwtsForm(payload);
+    callSubmitRotcForm(payload);
   };
+
+  const [isLoading] = useState(false);
 
   return {
     form,

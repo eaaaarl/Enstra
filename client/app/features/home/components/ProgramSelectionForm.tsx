@@ -91,20 +91,15 @@ export function ProgramSelectionForm({
 
 interface RegistrationActionsProps {
   onSubmit: () => void;
-  onReset: () => void;
   selectedProgram: boolean;
 }
 
 export function RegistrationActions({
   onSubmit,
-  onReset,
   selectedProgram,
 }: RegistrationActionsProps) {
   return (
     <div className="flex justify-between w-full">
-      <Button variant="outline" onClick={onReset} className="px-5">
-        Back to Selection
-      </Button>
       <Button onClick={onSubmit} disabled={selectedProgram} className="px-6">
         Confirm Registration
       </Button>

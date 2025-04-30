@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { StudentService } from "./core/service/student.service";
 import { CustomRequest } from "../middleware/type";
 import { ValidationError } from "../lib/customErrors";
+import { PrismaClient } from "../generated/prisma";
 
 
 

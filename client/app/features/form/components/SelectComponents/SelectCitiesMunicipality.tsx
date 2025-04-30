@@ -45,7 +45,7 @@ export function SelectCitiesMunicipalities({
       skip: !selectedProvinceCode,
     });
 
-  console.log("selectedProvinceCode", selectedProvinceCode);
+  /* console.log("selectedProvinceCode", selectedProvinceCode); */
 
   return (
     <Popover open={open} onOpenChange={setOpen}>

@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { useCwtsForm } from "../hooks/useCwtsForm";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -27,16 +26,17 @@ import { SelectCitiesMunicipalities } from "./SelectComponents/SelectCitiesMunic
 import { SelectBarangays } from "./SelectComponents/SelectBarangays";
 import Link from "next/link";
 import { Loader2 } from "lucide-react";
+import { useRotcForm } from "../hooks/useRotcForm";
+import { UploadBtn } from "@/lib/uploadthing";
 
-function CwtsForm() {
-  const { form, handleSubmit, isLoading } = useCwtsForm();
+export default function RotcForm() {
+  const { form, handleSubmit, isLoading } = useRotcForm();
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
-        {/* Student ID Section */}
         <div className="mb-8">
-          <h3 className="text-lg font-medium mb-4">Student ID</h3>
+          <h3 className="text-lg font-medium mb-4">School Student ID</h3>
           <div className="grid grid-cols-1 gap-4">
             <div className="space-y-2">
               <FormField
@@ -53,6 +53,52 @@ function CwtsForm() {
                 )}
               />
             </div>
+          </div>
+          <div className="grid grid-cols-1 gap-4">
+            <UploadBtn
+              endpoint="medicalCert"
+              onUploadBegin={() => {
+                console.log("onUploadbegin");
+              }}
+              onClientUploadComplete={(res) => {
+                console.log(
+                  "url image",
+                  res.map((file) => file.ufsUrl)
+                );
+                alert("Upload completed successfully!");
+              }}
+              onUploadError={(err) => {
+                alert(`Upload failed: ${err.message}`);
+              }}
+            />
+            {/* <input
+              ref={inputFileRef}
+              type="file"
+              accept="image/*"
+              onChange={handleImageSelection}
+              style={{ display: "none" }}
+            />
+
+            <Button
+              className="bg-blue-900 text-white px-4 py-2 rounded-lg mt-2"
+              type="button"
+              onClick={handleFileInputClick}
+            >
+              Take a Photo
+            </Button>
+
+            <div>
+              {selectedImage && (
+                <>
+                  <Image
+                    src={selectedImage}
+                    alt="Uploaded Image"
+                    height={100}
+                    width={100}
+                  />
+                </>
+              )}
+            </div> */}
           </div>
         </div>
 
@@ -178,6 +224,7 @@ function CwtsForm() {
                             : ""
                         }
                         onChange={(e) => {
+                          // This will create a proper Date object from the input value
                           field.onChange(
                             e.target.value ? new Date(e.target.value) : null
                           );
@@ -762,5 +809,3 @@ function CwtsForm() {
     </Form>
   );
 }
-
-export default CwtsForm;

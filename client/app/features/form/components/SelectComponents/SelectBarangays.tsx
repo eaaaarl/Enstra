@@ -42,7 +42,7 @@ export function SelectBarangays({
       skip: !selectedCityCode,
     });
 
-  console.log("selectedCityCode", selectedCityCode);
+  // console.log("selectedCityCode", selectedCityCode);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
