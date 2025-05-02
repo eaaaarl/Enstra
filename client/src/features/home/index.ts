@@ -1,4 +1,11 @@
-import CwtsForm from "./components/CwtsForm";
+import ProgramForms from "./components/ProgramForms";
 import { SelectBarangays } from "./components/SelectComponents/SelectBarangay";
+import { SelectCitiesMunicipalities } from "./components/SelectComponents/SelectCitiesAndMunicipalities";
+import { SelectProvince } from "./components/SelectComponents/SelectProvince";
 
-export { CwtsForm, SelectBarangays };
+export {
+  ProgramForms,
+  SelectBarangays,
+  SelectCitiesMunicipalities,
+  SelectProvince,
+};

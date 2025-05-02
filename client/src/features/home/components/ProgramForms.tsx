@@ -22,8 +22,10 @@ import { Loader2 } from "lucide-react";
 import { useCwtsForm } from "../hooks/useCwts";
 import { Link } from "react-router-dom";
 import { SelectBarangays } from "./SelectComponents/SelectBarangay";
+import { SelectCitiesMunicipalities } from "./SelectComponents/SelectCitiesAndMunicipalities";
+import { SelectProvince } from "./SelectComponents/SelectProvince";
 
-function CwtsForm() {
+function ProgramForms() {
   const { form, handleSubmit, isLoading } = useCwtsForm();
 
   return (
@@ -31,7 +33,6 @@ function CwtsForm() {
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
         {/* Student ID Section */}
         <div className="mb-8">
-          <h3 className="text-lg font-medium mb-4">Student ID</h3>
           <div className="grid grid-cols-1 gap-4">
             <div className="space-y-2">
               <FormField
@@ -758,4 +759,4 @@ function CwtsForm() {
   );
 }
 
-export default CwtsForm;
+export default ProgramForms;
