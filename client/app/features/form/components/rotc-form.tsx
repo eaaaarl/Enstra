@@ -27,7 +27,6 @@ import { SelectBarangays } from "./SelectComponents/SelectBarangays";
 import Link from "next/link";
 import { Loader2 } from "lucide-react";
 import { useRotcForm } from "../hooks/useRotcForm";
-import { UploadBtn } from "@/lib/uploadthing";
 
 export default function RotcForm() {
   const { form, handleSubmit, isLoading } = useRotcForm();
@@ -54,52 +53,7 @@ export default function RotcForm() {
               />
             </div>
           </div>
-          <div className="grid grid-cols-1 gap-4">
-            <UploadBtn
-              endpoint="medicalCert"
-              onUploadBegin={() => {
-                console.log("onUploadbegin");
-              }}
-              onClientUploadComplete={(res) => {
-                console.log(
-                  "url image",
-                  res.map((file) => file.ufsUrl)
-                );
-                alert("Upload completed successfully!");
-              }}
-              onUploadError={(err) => {
-                alert(`Upload failed: ${err.message}`);
-              }}
-            />
-            {/* <input
-              ref={inputFileRef}
-              type="file"
-              accept="image/*"
-              onChange={handleImageSelection}
-              style={{ display: "none" }}
-            />
-
-            <Button
-              className="bg-blue-900 text-white px-4 py-2 rounded-lg mt-2"
-              type="button"
-              onClick={handleFileInputClick}
-            >
-              Take a Photo
-            </Button>
-
-            <div>
-              {selectedImage && (
-                <>
-                  <Image
-                    src={selectedImage}
-                    alt="Uploaded Image"
-                    height={100}
-                    width={100}
-                  />
-                </>
-              )}
-            </div> */}
-          </div>
+          <div className="grid grid-cols-1 gap-4"></div>
         </div>
 
         <Separator className="my-6" />

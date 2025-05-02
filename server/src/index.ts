@@ -9,8 +9,6 @@ import helmet from "helmet";
 import authRoute from "./auth/auth.route";
 import { errorHandler } from "./middleware/errorHandler";
 import { studentRoute } from "./student/student.route";
-import { createUploadthing, createRouteHandler, type FileRouter } from "uploadthing/express";
-import { ourFileRouter } from "./uploadthing";
 
 const app = express();
 
@@ -38,11 +36,6 @@ app.get("/", (req, res) => {
 app.use('/api/auth', authRoute)
 app.use('/api/student', studentRoute)
 
-
-// Uploadthing 
-app.use('/api/uploadthing', createRouteHandler({
-  router: ourFileRouter,
-}))
 
 
 //ERROR HANDLER
