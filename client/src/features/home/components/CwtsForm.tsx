@@ -22,6 +22,8 @@ import { Loader2 } from "lucide-react";
 import { useCwtsForm } from "../hooks/useCwts";
 import { Link } from "react-router-dom";
 import { SelectBarangays } from "./SelectComponents/SelectBarangay";
+import { SelectCitiesMunicipalities } from "./SelectComponents/SelectCitiesAndMunicipalities";
+import { SelectProvince } from "./SelectComponents/SelectProvince";
 
 function CwtsForm() {
   const { form, handleSubmit, isLoading } = useCwtsForm();
