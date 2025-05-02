@@ -33,7 +33,6 @@ function ProgramForms() {
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
         {/* Student ID Section */}
         <div className="mb-8">
-          <h3 className="text-lg font-medium mb-4">Student ID</h3>
           <div className="grid grid-cols-1 gap-4">
             <div className="space-y-2">
               <FormField
