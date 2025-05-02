@@ -28,7 +28,7 @@ function HomePage() {
 
   const handleConfirmation = () => {
     if (selectedProgram) {
-      navigate(`/${selectedProgram.toLowerCase()}`);
+      navigate(`/forms/${selectedProgram.toLowerCase()}`);
     }
   };
   return (

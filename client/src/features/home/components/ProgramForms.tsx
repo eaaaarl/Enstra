@@ -25,7 +25,7 @@ import { SelectBarangays } from "./SelectComponents/SelectBarangay";
 import { SelectCitiesMunicipalities } from "./SelectComponents/SelectCitiesAndMunicipalities";
 import { SelectProvince } from "./SelectComponents/SelectProvince";
 
-function CwtsForm() {
+function ProgramForms() {
   const { form, handleSubmit, isLoading } = useCwtsForm();
 
   return (
@@ -760,4 +760,4 @@ function CwtsForm() {
   );
 }
 
-export default CwtsForm;
+export default ProgramForms;
