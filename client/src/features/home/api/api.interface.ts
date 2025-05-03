@@ -30,3 +30,17 @@ export interface psgcBarangayResponse {
   regionCode: string;
   islandGroupCode: string;
 }
+
+export interface getStatusRegistrationResponse {
+  resource: {
+    studentId: string;
+    program: string;
+    isRegistered: boolean;
+    registeredAt: Date;
+    status: string;
+  };
+}
+
+export interface getStatusRegistrationPaylod {
+  studentId: string;
+}

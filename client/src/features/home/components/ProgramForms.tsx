@@ -19,20 +19,20 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Loader2, Save, Upload } from "lucide-react";
-import { useCwtsForm } from "../hooks/useCwts";
 import { Link } from "react-router-dom";
 import { SelectBarangays } from "./SelectComponents/SelectBarangay";
 import { SelectCitiesMunicipalities } from "./SelectComponents/SelectCitiesAndMunicipalities";
 import { SelectProvince } from "./SelectComponents/SelectProvince";
 import { useUploadImageCert } from "../hooks/useUploadImageCert";
 import { useEffect } from "react";
+import { useFormsProgram } from "../hooks/useFormsProgram";
 
 interface ProgramFormsProps {
   programs: string;
 }
 
 function ProgramForms({ programs }: ProgramFormsProps) {
-  const { form, handleSubmit, isLoading } = useCwtsForm();
+  const { form, handleSubmit, isLoading } = useFormsProgram();
   const { handleFileChange, previewUrl, handleImageSubmit, isLoadingSave } =
     useUploadImageCert();
 
@@ -46,7 +46,7 @@ function ProgramForms({ programs }: ProgramFormsProps) {
 
   useEffect(() => {
     if (shortProgram) {
-      form.setValue("programs", shortProgram);
+      form.setValue("Programs", shortProgram);
     }
   }, [shortProgram, form]);
 

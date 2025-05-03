@@ -15,15 +15,15 @@ datasource db {
 }
 
 model User {
-  id           String    @id @default(uuid())
-  email        String    @unique
+  id           String   @id @default(uuid())
+  email        String   @unique
   password     String
-  studentId    String?   @unique
+  studentId    String?  @unique
   name         String?
   avatarUrl    String?
   imageUrl     String?
   refreshToken String?
-  Student      Student[]
+  Student      Student?
 }
 
 model Student {
@@ -68,5 +68,6 @@ model Student {
   updatedAt DateTime @updatedAt
 
   userId String? @unique
-  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  User User? @relation(fields: [userId], references: [id])
 }

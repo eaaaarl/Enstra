@@ -8,19 +8,17 @@ export class StudentRepository {
     private prisma = new PrismaClient();
 
     async createCwtsStudent(payload: studentDTO, userId:string) {
-        console.log('Programs payload', payload.Programs)
         try {
             const newCWstudent = await this.prisma.student.create({
                 data: {
                     ...payload,
                     date_birth: new Date(payload.date_birth),
                     Programs: payload.Programs,
-                    user: {
+                    User: {
                         connect: { id: userId }
                     }
                 }
             });
-            console.log('Student created', newCWstudent)
             return newCWstudent;
         } catch (error) {
             if (error instanceof PrismaClientKnownRequestError) {
@@ -92,4 +90,5 @@ export class StudentRepository {
               throw Error;  
         }
     }
+
 }

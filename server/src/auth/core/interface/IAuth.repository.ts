@@ -1,18 +1,28 @@
-import { signUpData } from "../entity/auth";
+import { signUpDTO } from "../schema/auth";
 
 
 
 export interface IAuthRepository {
-    createUser(payload: signUpData): Promise<signUpData>;
+    createUser(payload: signUpDTO): Promise<signUpDTO>;
     findByEmail(email:string) : Promise<UserData | null>;
     findByStudentId(studentId:string): Promise<UserData | null>;
-    findById(id:string): Promise<UserData | null>;
+    //findById(id:string): Promise<null>;
 }
 
-interface UserData {
+interface BaseUserData {
     id:string;
     name:string;
     studentId:string;
     email:string;
-    password:string;
+    avatarUrl?:string;
+}
+
+type UserData = Omit<BaseUserData,''> & {
+    password:string
+}
+
+type UserStudentData = Omit<BaseUserData, ''> & {
+    Student: {
+        Programs:string
+    }
 }

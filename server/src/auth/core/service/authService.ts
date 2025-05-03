@@ -1,17 +1,16 @@
 import { passwordCompare, passwordHash } from "../../../lib/bcrypt";
 import { AuthenticationError, ValidationError } from "../../../lib/customErrors";
 import { verifyToken } from "../../../lib/verifyToken";
-import { signInData, signUpData } from "../entity/auth";
-import { IAuthRepository } from "../interface/IAuth.repository";
-import { signInSchema, userSchema } from "../schema/auth";
+import { AuthRepository } from "../../auth.repository";
+import { signInDTO, signInSchema, signUpDTO, userSchema } from "../schema/auth";
 
 
 
 export class AuthService {
-   constructor(private readonly authRespository: IAuthRepository) {}
+   constructor(private readonly authRespository: AuthRepository) {}
 
 
-   async signUp(signUpData: signUpData){
+   async signUp(signUpData: signUpDTO){
         const {email,name,password,studentId} = userSchema.parse(signUpData)
         const existingUser = await this.authRespository.findByEmail(email)
 
@@ -37,7 +36,7 @@ export class AuthService {
         return newUser;
    }
 
-   async signIn(signInData: signInData) {
+   async signIn(signInData: signInDTO) {
         const { email, password } = signInSchema.parse(signInData);
         const user = await this.authRespository.findByEmail(email);
         if (!user) {
@@ -63,10 +62,7 @@ export class AuthService {
       const user = await this.authRespository.findById(decoded.userId);
       if (user) {
         return {
-          id: user.id,
-          email: user.email,
-          studentId: user.studentId,
-          name: user.name,
+          ...user
         };
       }
     } catch (error) {

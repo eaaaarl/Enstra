@@ -955,36 +955,6 @@ export namespace Prisma {
    */
 
 
-  /**
-   * Count Type UserCountOutputType
-   */
-
-  export type UserCountOutputType = {
-    Student: number
-  }
-
-  export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Student?: boolean | UserCountOutputTypeCountStudentArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserCountOutputType
-     */
-    select?: UserCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountStudentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: StudentWhereInput
-  }
-
 
   /**
    * Models
@@ -1179,7 +1149,6 @@ export namespace Prisma {
     imageUrl?: boolean
     refreshToken?: boolean
     Student?: boolean | User$StudentArgs<ExtArgs>
-    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1218,7 +1187,6 @@ export namespace Prisma {
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "studentId" | "name" | "avatarUrl" | "imageUrl" | "refreshToken", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Student?: boolean | User$StudentArgs<ExtArgs>
-    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
   export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1226,7 +1194,7 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      Student: Prisma.$StudentPayload<ExtArgs>[]
+      Student: Prisma.$StudentPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1631,7 +1599,7 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    Student<T extends User$StudentArgs<ExtArgs> = {}>(args?: Subset<T, User$StudentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Student<T extends User$StudentArgs<ExtArgs> = {}>(args?: Subset<T, User$StudentArgs<ExtArgs>>): Prisma__StudentClient<$Result.GetResult<Prisma.$StudentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2073,11 +2041,6 @@ export namespace Prisma {
      */
     include?: StudentInclude<ExtArgs> | null
     where?: StudentWhereInput
-    orderBy?: StudentOrderByWithRelationInput | StudentOrderByWithRelationInput[]
-    cursor?: StudentWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: StudentScalarFieldEnum | StudentScalarFieldEnum[]
   }
 
   /**
@@ -2535,7 +2498,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
-    user?: boolean | Student$userArgs<ExtArgs>
+    User?: boolean | Student$UserArgs<ExtArgs>
   }, ExtArgs["result"]["student"]>
 
   export type StudentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2578,7 +2541,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
-    user?: boolean | Student$userArgs<ExtArgs>
+    User?: boolean | Student$UserArgs<ExtArgs>
   }, ExtArgs["result"]["student"]>
 
   export type StudentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2621,7 +2584,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
-    user?: boolean | Student$userArgs<ExtArgs>
+    User?: boolean | Student$UserArgs<ExtArgs>
   }, ExtArgs["result"]["student"]>
 
   export type StudentSelectScalar = {
@@ -2668,19 +2631,19 @@ export namespace Prisma {
 
   export type StudentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "student_id" | "lastname" | "firstname" | "middlename" | "suffix" | "gender" | "date_birth" | "place_birth" | "phone_number" | "email" | "department" | "course" | "school" | "religion" | "weight" | "height" | "complexion" | "blood_type" | "street_address" | "city" | "state_province" | "postal_code" | "mothers_name" | "mothers_occupation" | "fathers_name" | "fathers_occupation" | "emergency_name" | "emergency_relationship" | "emergency_address" | "emergency_phonenumber" | "semester" | "school_year" | "grade" | "remarks" | "Programs" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["student"]>
   export type StudentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | Student$userArgs<ExtArgs>
+    User?: boolean | Student$UserArgs<ExtArgs>
   }
   export type StudentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | Student$userArgs<ExtArgs>
+    User?: boolean | Student$UserArgs<ExtArgs>
   }
   export type StudentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | Student$userArgs<ExtArgs>
+    User?: boolean | Student$UserArgs<ExtArgs>
   }
 
   export type $StudentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Student"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs> | null
+      User: Prisma.$UserPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3116,7 +3079,7 @@ export namespace Prisma {
    */
   export interface Prisma__StudentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends Student$userArgs<ExtArgs> = {}>(args?: Subset<T, Student$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    User<T extends Student$UserArgs<ExtArgs> = {}>(args?: Subset<T, Student$UserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3581,9 +3544,9 @@ export namespace Prisma {
   }
 
   /**
-   * Student.user
+   * Student.User
    */
-  export type Student$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Student$UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -3777,7 +3740,7 @@ export namespace Prisma {
     avatarUrl?: StringNullableFilter<"User"> | string | null
     imageUrl?: StringNullableFilter<"User"> | string | null
     refreshToken?: StringNullableFilter<"User"> | string | null
-    Student?: StudentListRelationFilter
+    Student?: XOR<StudentNullableScalarRelationFilter, StudentWhereInput> | null
   }
 
   export type UserOrderByWithRelationInput = {
@@ -3789,7 +3752,7 @@ export namespace Prisma {
     avatarUrl?: SortOrderInput | SortOrder
     imageUrl?: SortOrderInput | SortOrder
     refreshToken?: SortOrderInput | SortOrder
-    Student?: StudentOrderByRelationAggregateInput
+    Student?: StudentOrderByWithRelationInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -3804,7 +3767,7 @@ export namespace Prisma {
     avatarUrl?: StringNullableFilter<"User"> | string | null
     imageUrl?: StringNullableFilter<"User"> | string | null
     refreshToken?: StringNullableFilter<"User"> | string | null
-    Student?: StudentListRelationFilter
+    Student?: XOR<StudentNullableScalarRelationFilter, StudentWhereInput> | null
   }, "id" | "email" | "studentId">
 
   export type UserOrderByWithAggregationInput = {
@@ -3878,7 +3841,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Student"> | Date | string
     updatedAt?: DateTimeFilter<"Student"> | Date | string
     userId?: StringNullableFilter<"Student"> | string | null
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type StudentOrderByWithRelationInput = {
@@ -3921,7 +3884,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrderInput | SortOrder
-    user?: UserOrderByWithRelationInput
+    User?: UserOrderByWithRelationInput
   }
 
   export type StudentWhereUniqueInput = Prisma.AtLeast<{
@@ -3967,7 +3930,7 @@ export namespace Prisma {
     Programs?: StringNullableFilter<"Student"> | string | null
     createdAt?: DateTimeFilter<"Student"> | Date | string
     updatedAt?: DateTimeFilter<"Student"> | Date | string
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id" | "student_id" | "email" | "userId">
 
   export type StudentOrderByWithAggregationInput = {
@@ -4069,7 +4032,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     imageUrl?: string | null
     refreshToken?: string | null
-    Student?: StudentCreateNestedManyWithoutUserInput
+    Student?: StudentCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -4081,7 +4044,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     imageUrl?: string | null
     refreshToken?: string | null
-    Student?: StudentUncheckedCreateNestedManyWithoutUserInput
+    Student?: StudentUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -4093,7 +4056,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
-    Student?: StudentUpdateManyWithoutUserNestedInput
+    Student?: StudentUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -4105,7 +4068,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
-    Student?: StudentUncheckedUpdateManyWithoutUserNestedInput
+    Student?: StudentUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -4180,7 +4143,7 @@ export namespace Prisma {
     Programs?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    user?: UserCreateNestedOneWithoutStudentInput
+    User?: UserCreateNestedOneWithoutStudentInput
   }
 
   export type StudentUncheckedCreateInput = {
@@ -4264,7 +4227,7 @@ export namespace Prisma {
     Programs?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneWithoutStudentNestedInput
+    User?: UserUpdateOneWithoutStudentNestedInput
   }
 
   export type StudentUncheckedUpdateInput = {
@@ -4464,19 +4427,14 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type StudentListRelationFilter = {
-    every?: StudentWhereInput
-    some?: StudentWhereInput
-    none?: StudentWhereInput
+  export type StudentNullableScalarRelationFilter = {
+    is?: StudentWhereInput | null
+    isNot?: StudentWhereInput | null
   }
 
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
-  }
-
-  export type StudentOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type UserCountOrderByAggregateInput = {
@@ -4704,18 +4662,16 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type StudentCreateNestedManyWithoutUserInput = {
-    create?: XOR<StudentCreateWithoutUserInput, StudentUncheckedCreateWithoutUserInput> | StudentCreateWithoutUserInput[] | StudentUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: StudentCreateOrConnectWithoutUserInput | StudentCreateOrConnectWithoutUserInput[]
-    createMany?: StudentCreateManyUserInputEnvelope
-    connect?: StudentWhereUniqueInput | StudentWhereUniqueInput[]
+  export type StudentCreateNestedOneWithoutUserInput = {
+    create?: XOR<StudentCreateWithoutUserInput, StudentUncheckedCreateWithoutUserInput>
+    connectOrCreate?: StudentCreateOrConnectWithoutUserInput
+    connect?: StudentWhereUniqueInput
   }
 
-  export type StudentUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<StudentCreateWithoutUserInput, StudentUncheckedCreateWithoutUserInput> | StudentCreateWithoutUserInput[] | StudentUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: StudentCreateOrConnectWithoutUserInput | StudentCreateOrConnectWithoutUserInput[]
-    createMany?: StudentCreateManyUserInputEnvelope
-    connect?: StudentWhereUniqueInput | StudentWhereUniqueInput[]
+  export type StudentUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<StudentCreateWithoutUserInput, StudentUncheckedCreateWithoutUserInput>
+    connectOrCreate?: StudentCreateOrConnectWithoutUserInput
+    connect?: StudentWhereUniqueInput
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -4726,32 +4682,24 @@ export namespace Prisma {
     set?: string | null
   }
 
-  export type StudentUpdateManyWithoutUserNestedInput = {
-    create?: XOR<StudentCreateWithoutUserInput, StudentUncheckedCreateWithoutUserInput> | StudentCreateWithoutUserInput[] | StudentUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: StudentCreateOrConnectWithoutUserInput | StudentCreateOrConnectWithoutUserInput[]
-    upsert?: StudentUpsertWithWhereUniqueWithoutUserInput | StudentUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: StudentCreateManyUserInputEnvelope
-    set?: StudentWhereUniqueInput | StudentWhereUniqueInput[]
-    disconnect?: StudentWhereUniqueInput | StudentWhereUniqueInput[]
-    delete?: StudentWhereUniqueInput | StudentWhereUniqueInput[]
-    connect?: StudentWhereUniqueInput | StudentWhereUniqueInput[]
-    update?: StudentUpdateWithWhereUniqueWithoutUserInput | StudentUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: StudentUpdateManyWithWhereWithoutUserInput | StudentUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: StudentScalarWhereInput | StudentScalarWhereInput[]
+  export type StudentUpdateOneWithoutUserNestedInput = {
+    create?: XOR<StudentCreateWithoutUserInput, StudentUncheckedCreateWithoutUserInput>
+    connectOrCreate?: StudentCreateOrConnectWithoutUserInput
+    upsert?: StudentUpsertWithoutUserInput
+    disconnect?: StudentWhereInput | boolean
+    delete?: StudentWhereInput | boolean
+    connect?: StudentWhereUniqueInput
+    update?: XOR<XOR<StudentUpdateToOneWithWhereWithoutUserInput, StudentUpdateWithoutUserInput>, StudentUncheckedUpdateWithoutUserInput>
   }
 
-  export type StudentUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<StudentCreateWithoutUserInput, StudentUncheckedCreateWithoutUserInput> | StudentCreateWithoutUserInput[] | StudentUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: StudentCreateOrConnectWithoutUserInput | StudentCreateOrConnectWithoutUserInput[]
-    upsert?: StudentUpsertWithWhereUniqueWithoutUserInput | StudentUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: StudentCreateManyUserInputEnvelope
-    set?: StudentWhereUniqueInput | StudentWhereUniqueInput[]
-    disconnect?: StudentWhereUniqueInput | StudentWhereUniqueInput[]
-    delete?: StudentWhereUniqueInput | StudentWhereUniqueInput[]
-    connect?: StudentWhereUniqueInput | StudentWhereUniqueInput[]
-    update?: StudentUpdateWithWhereUniqueWithoutUserInput | StudentUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: StudentUpdateManyWithWhereWithoutUserInput | StudentUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: StudentScalarWhereInput | StudentScalarWhereInput[]
+  export type StudentUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<StudentCreateWithoutUserInput, StudentUncheckedCreateWithoutUserInput>
+    connectOrCreate?: StudentCreateOrConnectWithoutUserInput
+    upsert?: StudentUpsertWithoutUserInput
+    disconnect?: StudentWhereInput | boolean
+    delete?: StudentWhereInput | boolean
+    connect?: StudentWhereUniqueInput
+    update?: XOR<XOR<StudentUpdateToOneWithWhereWithoutUserInput, StudentUpdateWithoutUserInput>, StudentUncheckedUpdateWithoutUserInput>
   }
 
   export type UserCreateNestedOneWithoutStudentInput = {
@@ -4970,171 +4918,15 @@ export namespace Prisma {
     create: XOR<StudentCreateWithoutUserInput, StudentUncheckedCreateWithoutUserInput>
   }
 
-  export type StudentCreateManyUserInputEnvelope = {
-    data: StudentCreateManyUserInput | StudentCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type StudentUpsertWithWhereUniqueWithoutUserInput = {
-    where: StudentWhereUniqueInput
+  export type StudentUpsertWithoutUserInput = {
     update: XOR<StudentUpdateWithoutUserInput, StudentUncheckedUpdateWithoutUserInput>
     create: XOR<StudentCreateWithoutUserInput, StudentUncheckedCreateWithoutUserInput>
+    where?: StudentWhereInput
   }
 
-  export type StudentUpdateWithWhereUniqueWithoutUserInput = {
-    where: StudentWhereUniqueInput
+  export type StudentUpdateToOneWithWhereWithoutUserInput = {
+    where?: StudentWhereInput
     data: XOR<StudentUpdateWithoutUserInput, StudentUncheckedUpdateWithoutUserInput>
-  }
-
-  export type StudentUpdateManyWithWhereWithoutUserInput = {
-    where: StudentScalarWhereInput
-    data: XOR<StudentUpdateManyMutationInput, StudentUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type StudentScalarWhereInput = {
-    AND?: StudentScalarWhereInput | StudentScalarWhereInput[]
-    OR?: StudentScalarWhereInput[]
-    NOT?: StudentScalarWhereInput | StudentScalarWhereInput[]
-    id?: StringFilter<"Student"> | string
-    student_id?: StringFilter<"Student"> | string
-    lastname?: StringFilter<"Student"> | string
-    firstname?: StringFilter<"Student"> | string
-    middlename?: StringNullableFilter<"Student"> | string | null
-    suffix?: StringNullableFilter<"Student"> | string | null
-    gender?: StringFilter<"Student"> | string
-    date_birth?: DateTimeFilter<"Student"> | Date | string
-    place_birth?: StringFilter<"Student"> | string
-    phone_number?: StringFilter<"Student"> | string
-    email?: StringFilter<"Student"> | string
-    department?: StringFilter<"Student"> | string
-    course?: StringFilter<"Student"> | string
-    school?: StringFilter<"Student"> | string
-    religion?: StringNullableFilter<"Student"> | string | null
-    weight?: StringNullableFilter<"Student"> | string | null
-    height?: StringNullableFilter<"Student"> | string | null
-    complexion?: StringNullableFilter<"Student"> | string | null
-    blood_type?: StringNullableFilter<"Student"> | string | null
-    street_address?: StringFilter<"Student"> | string
-    city?: StringFilter<"Student"> | string
-    state_province?: StringFilter<"Student"> | string
-    postal_code?: StringFilter<"Student"> | string
-    mothers_name?: StringFilter<"Student"> | string
-    mothers_occupation?: StringNullableFilter<"Student"> | string | null
-    fathers_name?: StringFilter<"Student"> | string
-    fathers_occupation?: StringNullableFilter<"Student"> | string | null
-    emergency_name?: StringFilter<"Student"> | string
-    emergency_relationship?: StringFilter<"Student"> | string
-    emergency_address?: StringFilter<"Student"> | string
-    emergency_phonenumber?: StringFilter<"Student"> | string
-    semester?: StringFilter<"Student"> | string
-    school_year?: StringFilter<"Student"> | string
-    grade?: StringNullableFilter<"Student"> | string | null
-    remarks?: StringNullableFilter<"Student"> | string | null
-    Programs?: StringNullableFilter<"Student"> | string | null
-    createdAt?: DateTimeFilter<"Student"> | Date | string
-    updatedAt?: DateTimeFilter<"Student"> | Date | string
-    userId?: StringNullableFilter<"Student"> | string | null
-  }
-
-  export type UserCreateWithoutStudentInput = {
-    id?: string
-    email: string
-    password: string
-    studentId?: string | null
-    name?: string | null
-    avatarUrl?: string | null
-    imageUrl?: string | null
-    refreshToken?: string | null
-  }
-
-  export type UserUncheckedCreateWithoutStudentInput = {
-    id?: string
-    email: string
-    password: string
-    studentId?: string | null
-    name?: string | null
-    avatarUrl?: string | null
-    imageUrl?: string | null
-    refreshToken?: string | null
-  }
-
-  export type UserCreateOrConnectWithoutStudentInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutStudentInput, UserUncheckedCreateWithoutStudentInput>
-  }
-
-  export type UserUpsertWithoutStudentInput = {
-    update: XOR<UserUpdateWithoutStudentInput, UserUncheckedUpdateWithoutStudentInput>
-    create: XOR<UserCreateWithoutStudentInput, UserUncheckedCreateWithoutStudentInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutStudentInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutStudentInput, UserUncheckedUpdateWithoutStudentInput>
-  }
-
-  export type UserUpdateWithoutStudentInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    studentId?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type UserUncheckedUpdateWithoutStudentInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    studentId?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type StudentCreateManyUserInput = {
-    id?: string
-    student_id: string
-    lastname: string
-    firstname: string
-    middlename?: string | null
-    suffix?: string | null
-    gender: string
-    date_birth: Date | string
-    place_birth: string
-    phone_number: string
-    email: string
-    department: string
-    course: string
-    school: string
-    religion?: string | null
-    weight?: string | null
-    height?: string | null
-    complexion?: string | null
-    blood_type?: string | null
-    street_address: string
-    city: string
-    state_province: string
-    postal_code: string
-    mothers_name: string
-    mothers_occupation?: string | null
-    fathers_name: string
-    fathers_occupation?: string | null
-    emergency_name: string
-    emergency_relationship: string
-    emergency_address: string
-    emergency_phonenumber: string
-    semester: string
-    school_year: string
-    grade?: string | null
-    remarks?: string | null
-    Programs?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type StudentUpdateWithoutUserInput = {
@@ -5219,45 +5011,64 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type StudentUncheckedUpdateManyWithoutUserInput = {
+  export type UserCreateWithoutStudentInput = {
+    id?: string
+    email: string
+    password: string
+    studentId?: string | null
+    name?: string | null
+    avatarUrl?: string | null
+    imageUrl?: string | null
+    refreshToken?: string | null
+  }
+
+  export type UserUncheckedCreateWithoutStudentInput = {
+    id?: string
+    email: string
+    password: string
+    studentId?: string | null
+    name?: string | null
+    avatarUrl?: string | null
+    imageUrl?: string | null
+    refreshToken?: string | null
+  }
+
+  export type UserCreateOrConnectWithoutStudentInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutStudentInput, UserUncheckedCreateWithoutStudentInput>
+  }
+
+  export type UserUpsertWithoutStudentInput = {
+    update: XOR<UserUpdateWithoutStudentInput, UserUncheckedUpdateWithoutStudentInput>
+    create: XOR<UserCreateWithoutStudentInput, UserUncheckedCreateWithoutStudentInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutStudentInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutStudentInput, UserUncheckedUpdateWithoutStudentInput>
+  }
+
+  export type UserUpdateWithoutStudentInput = {
     id?: StringFieldUpdateOperationsInput | string
-    student_id?: StringFieldUpdateOperationsInput | string
-    lastname?: StringFieldUpdateOperationsInput | string
-    firstname?: StringFieldUpdateOperationsInput | string
-    middlename?: NullableStringFieldUpdateOperationsInput | string | null
-    suffix?: NullableStringFieldUpdateOperationsInput | string | null
-    gender?: StringFieldUpdateOperationsInput | string
-    date_birth?: DateTimeFieldUpdateOperationsInput | Date | string
-    place_birth?: StringFieldUpdateOperationsInput | string
-    phone_number?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    department?: StringFieldUpdateOperationsInput | string
-    course?: StringFieldUpdateOperationsInput | string
-    school?: StringFieldUpdateOperationsInput | string
-    religion?: NullableStringFieldUpdateOperationsInput | string | null
-    weight?: NullableStringFieldUpdateOperationsInput | string | null
-    height?: NullableStringFieldUpdateOperationsInput | string | null
-    complexion?: NullableStringFieldUpdateOperationsInput | string | null
-    blood_type?: NullableStringFieldUpdateOperationsInput | string | null
-    street_address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state_province?: StringFieldUpdateOperationsInput | string
-    postal_code?: StringFieldUpdateOperationsInput | string
-    mothers_name?: StringFieldUpdateOperationsInput | string
-    mothers_occupation?: NullableStringFieldUpdateOperationsInput | string | null
-    fathers_name?: StringFieldUpdateOperationsInput | string
-    fathers_occupation?: NullableStringFieldUpdateOperationsInput | string | null
-    emergency_name?: StringFieldUpdateOperationsInput | string
-    emergency_relationship?: StringFieldUpdateOperationsInput | string
-    emergency_address?: StringFieldUpdateOperationsInput | string
-    emergency_phonenumber?: StringFieldUpdateOperationsInput | string
-    semester?: StringFieldUpdateOperationsInput | string
-    school_year?: StringFieldUpdateOperationsInput | string
-    grade?: NullableStringFieldUpdateOperationsInput | string | null
-    remarks?: NullableStringFieldUpdateOperationsInput | string | null
-    Programs?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    password?: StringFieldUpdateOperationsInput | string
+    studentId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type UserUncheckedUpdateWithoutStudentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    studentId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 
