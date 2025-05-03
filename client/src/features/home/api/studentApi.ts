@@ -22,7 +22,25 @@ export const studentApi = createApi({
         body: data,
       }),
     }),
+
+    uploadImageCertificate: build.mutation<
+      { message: string; imageCertificate: string },
+      { userId: string; file: File }
+    >({
+      query: ({ file, userId }) => {
+        const formData = new FormData();
+        formData.append("imageCert", file);
+        return {
+          url: `/image-certificate/${userId}`,
+          method: "PUT",
+          body: formData,
+        };
+      },
+    }),
   }),
 });
 
-export const { useCreateStudentCwtsMutation } = studentApi;
+export const {
+  useCreateStudentCwtsMutation,
+  useUploadImageCertificateMutation,
+} = studentApi;

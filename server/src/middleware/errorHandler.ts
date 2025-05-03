@@ -1,8 +1,9 @@
 import { NextFunction, Request, Response } from "express";
-import { CustomError } from "../lib/customErrors";
+import { CloudinaryError, CustomError } from "../lib/customErrors";
 import { handlePrismaErrors } from "../lib/handlePrismaErrors";
 import { PrismaClientKnownRequestError, PrismaClientValidationError } from "@prisma/client/runtime/library";
 import { ZodError } from "zod";
+import multer from "multer";
 
 
 
@@ -42,6 +43,27 @@ next: NextFunction
         });
         return;
       }
+
+
+        // Multer Errors
+  if (err instanceof multer.MulterError) {
+   const errorResponse = {
+      status: "fail",
+      message: err.message
+    };
+    res.status(400).json(errorResponse);
+    return;
+  }
+
+    // Cloudinary Errors 
+    if (err instanceof CloudinaryError) {
+      const errorResponse = {
+          status: "error",
+          message: err.message,
+      };
+      res.status(500).json(errorResponse);
+      return;
+  }
 
     res.status(500).json({
         message: "Internal Server Error",

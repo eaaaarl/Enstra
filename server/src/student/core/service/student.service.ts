@@ -1,6 +1,8 @@
 import { Prisma } from "../../../generated/prisma";
-import { ValidationError } from "../../../lib/customErrors";
+import { uploadImage } from "../../../lib/cloudinary";
+import { NotFoundError, ValidationError } from "../../../lib/customErrors";
 import { StudentRepository } from "../../student.repository";
+import { FileInput } from "../interface/IStudent.repository";
 import { studentSchema } from "../schema/student.schema";
 
 
@@ -21,5 +23,21 @@ export class StudentService {
        }
         const newStudent = await this.studentRepository.createCwtsStudent(payload, userId);
         return newStudent;
+    }
+
+    async updateImageCertificate(userId:string, file:FileInput){
+        if(!file){
+            throw new NotFoundError('Image file not found')
+        }
+
+        const imageUrl = await uploadImage({
+            filePath: file.path,
+            folder: 'documents',
+            deleteLocalFile: true
+        })
+
+        const updatedImageCertificate = await this.studentRepository.updateImageCertificate({userId, imageUrl})
+
+        return updatedImageCertificate
     }
 }

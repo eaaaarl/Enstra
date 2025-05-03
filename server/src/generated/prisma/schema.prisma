@@ -20,14 +20,20 @@ model User {
   password     String
   studentId    String?   @unique
   name         String?
-  avatar       String?
+  avatarUrl    String?
   refreshToken String?
   Student      Student[]
 }
 
+enum PROGRAMS {
+  CWTS
+  LTS
+  ROTC
+}
+
 model Student {
-  id                     String   @id @default(uuid())
-  student_id             String   @unique
+  id                     String    @id @default(uuid())
+  student_id             String    @unique
   lastname               String
   firstname              String
   middlename             String?
@@ -36,7 +42,7 @@ model Student {
   date_birth             DateTime
   place_birth            String
   phone_number           String
-  email                  String   @unique
+  email                  String    @unique
   department             String
   course                 String
   school                 String
@@ -61,9 +67,12 @@ model Student {
   school_year            String
   grade                  String?
   remarks                String?
-  createdAt              DateTime @default(now())
-  updatedAt              DateTime @updatedAt
+  Programs               PROGRAMS?
+  imageUrl               String?
 
-  userId String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String? @unique
   user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

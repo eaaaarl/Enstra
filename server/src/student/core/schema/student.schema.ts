@@ -7,7 +7,7 @@ export const studentSchema = z.object({
   middlename: z.string().optional(),
   suffix: z.string().optional(),
   gender: z.enum(["Male", "Female", "Other"]),
-  date_birth: z.string().min(1, "Date of birth is required"), // consider z.coerce.date() if using date input
+  date_birth: z.string().min(1, "Date of birth is required"), 
   place_birth: z.string().min(1, "Place of birth is required"),
   phone_number: z.string().min(1, "Phone number is required"),
   email: z.string().email("Invalid email"),

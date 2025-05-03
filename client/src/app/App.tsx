@@ -13,6 +13,7 @@ function App() {
 
   return (
     <Routes>
+      {/*  Public Routes */}
       <Route element={<AuthLayout />}>
         <Route
           path="/"
@@ -23,6 +24,7 @@ function App() {
         />
       </Route>
 
+      {/* Protected Route */}
       <Route
         element={
           <ProtectedRoute user={authUser}>

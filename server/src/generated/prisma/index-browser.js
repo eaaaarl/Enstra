@@ -123,7 +123,7 @@ exports.Prisma.UserScalarFieldEnum = {
   password: 'password',
   studentId: 'studentId',
   name: 'name',
-  avatar: 'avatar',
+  avatarUrl: 'avatarUrl',
   refreshToken: 'refreshToken'
 };
 
@@ -163,6 +163,8 @@ exports.Prisma.StudentScalarFieldEnum = {
   school_year: 'school_year',
   grade: 'grade',
   remarks: 'remarks',
+  Programs: 'Programs',
+  imageUrl: 'imageUrl',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   userId: 'userId'
@@ -182,7 +184,11 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-
+exports.PROGRAMS = exports.$Enums.PROGRAMS = {
+  CWTS: 'CWTS',
+  LTS: 'LTS',
+  ROTC: 'ROTC'
+};
 
 exports.Prisma.ModelName = {
   User: 'User',

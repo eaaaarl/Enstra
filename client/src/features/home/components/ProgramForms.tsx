@@ -18,21 +18,24 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
+import { Loader2, Upload } from "lucide-react";
 import { useCwtsForm } from "../hooks/useCwts";
 import { Link } from "react-router-dom";
 import { SelectBarangays } from "./SelectComponents/SelectBarangay";
 import { SelectCitiesMunicipalities } from "./SelectComponents/SelectCitiesAndMunicipalities";
 import { SelectProvince } from "./SelectComponents/SelectProvince";
+import { useUploadImageCert } from "../hooks/useUploadImageCert";
 
 function ProgramForms() {
   const { form, handleSubmit, isLoading } = useCwtsForm();
+  const { handleFileChange, previewUrl, handleImageSubmit, isLoadingSave } =
+    useUploadImageCert();
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
         {/* Student ID Section */}
-        <div className="mb-8">
+        <div className="mb-6">
           <div className="grid grid-cols-1 gap-4">
             <div className="space-y-2">
               <FormField
@@ -50,6 +53,58 @@ function ProgramForms() {
               />
             </div>
           </div>
+        </div>
+
+        <div className="mb-6">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Medical Certificate
+          </label>
+
+          <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
+            <input
+              type="file"
+              id="fileUpload"
+              onChange={(e) => handleFileChange(e.target.files?.[0] || null)}
+              className="hidden"
+              accept="image/*,.pdf"
+              multiple
+            />
+
+            <label
+              htmlFor="fileUpload"
+              className="flex flex-col items-center justify-center cursor-pointer"
+            >
+              <Upload className="h-8 w-8 text-blue-500 mb-2" />
+              <span className="text-sm font-medium text-blue-600">
+                Upload Medical Certificate
+              </span>
+              <span className="text-xs text-gray-500 mt-1">
+                Supported formats: JPG, PNG, PDF
+              </span>
+            </label>
+          </div>
+
+          {previewUrl && (
+            <>
+              <div className="mt-4">
+                <p className="text-sm font-medium text-gray-700 mb-2">
+                  Uploaded Files:
+                </p>
+                <div>
+                  <img src={previewUrl} width={100} height={100} />
+                </div>
+              </div>
+              <div className="mt-4">
+                <Button type="button" onClick={handleImageSubmit}>
+                  {isLoadingSave ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    "Save Image"
+                  )}
+                </Button>
+              </div>
+            </>
+          )}
         </div>
 
         <Separator className="my-6" />

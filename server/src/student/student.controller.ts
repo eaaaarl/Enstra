@@ -2,20 +2,19 @@ import { NextFunction, Request, Response } from "express";
 import { StudentService } from "./core/service/student.service";
 import { CustomRequest } from "../middleware/type";
 import { ValidationError } from "../lib/customErrors";
-import { PrismaClient } from "../generated/prisma";
 
 
 
 export class StudentController {
     constructor(private readonly studentService: StudentService) {
         this.createStudentCwts = this.createStudentCwts.bind(this)
+        this.updateImageCertificate = this.updateImageCertificate.bind(this)
     }
 
     async createStudentCwts(req:CustomRequest, res: Response, next:NextFunction){
         try {
             const payload = req.body;
             const userId = req.user?.id as string;
-
             if (!userId) {
                throw new ValidationError('User Id is not found...')
             }
@@ -30,5 +29,25 @@ export class StudentController {
             next(error)
         }
      
+    }
+
+
+    async updateImageCertificate(req: Request, res: Response, next: NextFunction){
+        try {
+            const { file } = req;
+            const userId = req.params.id;
+            console.log('User iD', userId)
+            console.log('Files', file)
+            if (!file) {
+                res.status(400).json({ message: "No file uploaded" });
+                return;
+            }
+
+            const imageCert = await this.studentService.updateImageCertificate(userId, file);
+
+            res.status(200).json({ "message": "Image Certificate has been updated", imageCertificate: imageCert });
+        } catch (error) {
+            next(error);
+        }
     }
 }
