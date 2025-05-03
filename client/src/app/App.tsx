@@ -6,39 +6,45 @@ import ProtectedRoute from "./ProtectedRoute";
 import { useAppSelector } from "@/lib/redux/hooks";
 import { appRoutes } from "./routes/appRoutes";
 import React from "react";
+import AuthLoader from "./AuthLoader";
 
 function App() {
   const authUser = useAppSelector((state) => state.auth);
   const authHomePage = "/home";
 
   return (
-    <Routes>
-      <Route element={<AuthLayout />}>
-        <Route
-          path="/"
-          index
-          element={
-            authUser.id ? <Navigate to={authHomePage} /> : <SignInForm />
-          }
-        />
-      </Route>
-
-      <Route
-        element={
-          <ProtectedRoute user={authUser}>
-            <HomeLayout />
-          </ProtectedRoute>
-        }
-      >
-        {appRoutes.map((route) => (
+    <AuthLoader>
+      <Routes>
+        {/*  Public Routes */}
+        <Route element={<AuthLayout />}>
           <Route
-            key={route.path}
-            path={route.path}
-            element={React.createElement(route.element)}
+            path="/"
+            index
+            element={
+              authUser.id ? <Navigate to={authHomePage} /> : <SignInForm />
+            }
           />
-        ))}
-      </Route>
-    </Routes>
+        </Route>
+
+        {/* Protected Route */}
+
+        <Route
+          element={
+            <ProtectedRoute user={authUser}>
+              <HomeLayout />
+            </ProtectedRoute>
+          }
+        >
+          {appRoutes.map((route) => (
+            <Route
+              key={route.path}
+              path={route.path}
+              element={React.createElement(route.element)}
+            />
+          ))}
+        </Route>
+      </Routes>
+    </AuthLoader>
   );
 }
 

@@ -23,3 +23,15 @@ export class AuthenticationError extends CustomError {
         super(message, 401);
     }
 }
+
+export class CloudinaryError extends CustomError {
+    constructor(message: string = "Cloudinary Upload Error") {
+        super(message, 500);
+    }
+}
+
+export class NotFoundError extends CustomError {
+    constructor(resource: string) {
+        super(`${resource} is not found`, 404);
+    }
+}

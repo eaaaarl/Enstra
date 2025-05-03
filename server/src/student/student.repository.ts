@@ -1,6 +1,7 @@
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { PrismaClient, Prisma } from "../generated/prisma"; // Import Prisma types
 import { DatabaseError } from "../lib/customErrors";
+import { updateImageCertificate } from "./core/interface/IStudent.repository";
 
 export class StudentRepository {
     private prisma = new PrismaClient();
@@ -64,6 +65,28 @@ export class StudentRepository {
                 throw new DatabaseError("Failed to find by email at findByStudentEmail method");
             }
             throw error;
+        }
+    }
+
+    async updateImageCertificate({userId,imageUrl}: updateImageCertificate){
+        try {
+
+                const updatedStudent = await this.prisma.user.update({
+                    where: {
+                        id: userId
+                    },
+                    data: {
+                        imageUrl
+                    }
+                })
+
+                return updatedStudent.imageUrl as string
+        } catch (error) {
+            if (error instanceof PrismaClientKnownRequestError) {
+                console.error(error.message);
+                throw new DatabaseError("Database error at updateImageCertificate method");
+              }
+              throw Error;  
         }
     }
 }
