@@ -10,21 +10,17 @@ export class AuthRepository {
     async createUser(payload: signUpDTO) {
         try {
             const newUser = await this.prisma.user.create({
-                data: {
-                    name: payload.name,
-                    studentId: payload.studentId,
-                    email: payload.email,
-                    password: payload.password
+                data: payload,
+                select: {
+                  id: true,
+                  name: true,
+                  studentId: true,
+                  avatarUrl: true,
+                  email: true,
                 }
             })
             
-            return {
-                id: newUser.id ?? "",
-                name: newUser.name ?? "",
-                studentId: newUser.studentId ?? "",
-                email: newUser.email,
-                password: newUser.password
-            }
+           return newUser;
         } catch (error) {
             if(error instanceof PrismaClientKnownRequestError) {
                 throw new DatabaseError("Failed to create user at createUser method")
@@ -38,6 +34,14 @@ export class AuthRepository {
         const user = await this.prisma.user.findUnique({
             where: {
                 email
+            },
+            select: {
+              id: true,
+              name: true,
+              studentId: true,
+              avatarUrl: true,
+              email: true,
+              password: true
             }
         })
 
@@ -45,13 +49,7 @@ export class AuthRepository {
             return null;
         }
 
-        return {
-            id: user?.id ?? "",
-            name: user?.name ?? "",
-            studentId: user?.studentId ?? "",
-            email: user?.email ?? "",
-            password: user?.password ?? ""
-        }
+        return user;
       } catch (error) {
         if(error instanceof PrismaClientKnownRequestError) {
             throw new DatabaseError("Failed to find user email at findByEmail method")
@@ -72,11 +70,6 @@ export class AuthRepository {
                 studentId: true,
                 avatarUrl: true,
                 email: true,
-                Student: {
-                  select: {
-                    Programs: true
-                  }
-                }
               }
           })
   
@@ -98,20 +91,20 @@ export class AuthRepository {
           const user = await this.prisma.user.findUnique({
               where: {
                 studentId
+              },
+              select: {
+                id:true,
+                studentId: true,
+                email: true,
+                password: true
               }
           })
   
           if (!user) {
               return null;
           }
-  
-          return {
-            id: user?.id ?? "",
-              name: user?.name ?? "",
-              studentId: user?.studentId ?? "",
-              email: user?.email ?? "",
-              password: user?.password ?? ""
-          }
+          
+          return user
         } catch (error) {
           if(error instanceof PrismaClientKnownRequestError) {
               throw new DatabaseError("Failed to find user studentId at findByStudentId method")

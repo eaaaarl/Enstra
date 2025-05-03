@@ -9,12 +9,11 @@ import { signInDTO, signInSchema, signUpDTO, userSchema } from "../schema/auth";
 export class AuthService {
    constructor(private readonly authRespository: AuthRepository) {}
 
-
    async signUp(signUpData: signUpDTO){
-        const {email,name,password,studentId} = userSchema.parse(signUpData)
-        const existingUser = await this.authRespository.findByEmail(email)
+        const payload = userSchema.parse(signUpData)
+        const existingUser = await this.authRespository.findByEmail(payload.email)
 
-        const existingStudentId = await this.authRespository.findByStudentId(studentId)
+        const existingStudentId = await this.authRespository.findByStudentId(payload.studentId)
         if (existingUser) {
             throw new ValidationError("Email already exists")
         }
@@ -23,13 +22,11 @@ export class AuthService {
             throw new ValidationError("Student ID already exists")
         }
 
-        const toHashPassword = passwordHash(password)
+        const toHashPassword = passwordHash(payload.password)
 
         const newUser = await this.authRespository.createUser({
-            email,
-            name,
-            password:toHashPassword,
-            studentId
+           ...payload,
+           password: toHashPassword
         })
        
 
