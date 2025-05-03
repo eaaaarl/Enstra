@@ -184,11 +184,7 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-exports.PROGRAMS = exports.$Enums.PROGRAMS = {
-  CWTS: 'CWTS',
-  LTS: 'LTS',
-  ROTC: 'ROTC'
-};
+
 
 exports.Prisma.ModelName = {
   User: 'User',

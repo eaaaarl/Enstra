@@ -25,16 +25,36 @@ import { SelectBarangays } from "./SelectComponents/SelectBarangay";
 import { SelectCitiesMunicipalities } from "./SelectComponents/SelectCitiesAndMunicipalities";
 import { SelectProvince } from "./SelectComponents/SelectProvince";
 import { useUploadImageCert } from "../hooks/useUploadImageCert";
+import { useEffect } from "react";
 
-function ProgramForms() {
+interface ProgramFormsProps {
+  programs: string;
+}
+
+function ProgramForms({ programs }: ProgramFormsProps) {
   const { form, handleSubmit, isLoading } = useCwtsForm();
   const { handleFileChange, previewUrl, handleImageSubmit, isLoadingSave } =
     useUploadImageCert();
 
+  const programShortMap: Record<string, "CWTS" | "LTS" | "ROTC"> = {
+    "Civic Welfare Training Service (CWTS)": "CWTS",
+    "Literacy Training Service (LTS)": "LTS",
+    "Reserve Officers' Training Corps (ROTC)": "ROTC",
+  };
+
+  const shortProgram = programShortMap[programs];
+
+  useEffect(() => {
+    if (shortProgram) {
+      form.setValue("programs", shortProgram);
+    }
+  }, [shortProgram, form]);
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
-        {/* Student ID Section */}
+        <input {...form.register("Programs")} value={shortProgram} readOnly />
+
         <div className="mb-6">
           <div className="grid grid-cols-1 gap-4">
             <div className="space-y-2">

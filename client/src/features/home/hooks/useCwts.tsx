@@ -12,6 +12,7 @@ export const useCwtsForm = () => {
   const form = useForm({
     resolver: zodResolver(studentSchema),
     defaultValues: {
+      Programs: undefined,
       blood_type: "",
       city: "",
       complexion: "",

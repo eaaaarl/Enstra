@@ -1,23 +1,26 @@
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
-import { PrismaClient, Prisma } from "../generated/prisma"; // Import Prisma types
+import { PrismaClient } from "../generated/prisma"; 
 import { DatabaseError } from "../lib/customErrors";
 import { updateImageCertificate } from "./core/interface/IStudent.repository";
+import { studentDTO } from "./core/schema/student.schema";
 
 export class StudentRepository {
     private prisma = new PrismaClient();
 
-    async createCwtsStudent(payload: Prisma.StudentCreateInput, userId:string) {
+    async createCwtsStudent(payload: studentDTO, userId:string) {
+        console.log('Programs payload', payload.Programs)
         try {
             const newCWstudent = await this.prisma.student.create({
                 data: {
                     ...payload,
                     date_birth: new Date(payload.date_birth),
+                    Programs: payload.Programs,
                     user: {
                         connect: { id: userId }
                     }
                 }
             });
-
+            console.log('Student created', newCWstudent)
             return newCWstudent;
         } catch (error) {
             if (error instanceof PrismaClientKnownRequestError) {

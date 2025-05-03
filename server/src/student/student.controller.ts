@@ -15,6 +15,7 @@ export class StudentController {
         try {
             const payload = req.body;
             const userId = req.user?.id as string;
+            console.log(payload)
             if (!userId) {
                throw new ValidationError('User Id is not found...')
             }
