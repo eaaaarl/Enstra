@@ -124,6 +124,7 @@ exports.Prisma.UserScalarFieldEnum = {
   studentId: 'studentId',
   name: 'name',
   avatarUrl: 'avatarUrl',
+  imageUrl: 'imageUrl',
   refreshToken: 'refreshToken'
 };
 
@@ -164,7 +165,6 @@ exports.Prisma.StudentScalarFieldEnum = {
   grade: 'grade',
   remarks: 'remarks',
   Programs: 'Programs',
-  imageUrl: 'imageUrl',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   userId: 'userId'

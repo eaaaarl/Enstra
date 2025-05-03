@@ -52,12 +52,14 @@ export const uploadImage = async ({
           if (error) console.error("Error deleting the local file:", error);
       });
   }
-  console.log("Cloudinary upload result:", {
+
+ /*  console.log("Cloudinary upload result:", {
     public_id: result.public_id,
     secure_url: result.secure_url,
     format: result.format,
     size: result.bytes,
-  });
+  }); */
+
     return result.secure_url;
   } catch (error) {
     throw new CloudinaryError("Failed to upload image to Cloudinary");

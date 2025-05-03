@@ -21,6 +21,7 @@ model User {
   studentId    String?   @unique
   name         String?
   avatarUrl    String?
+  imageUrl     String?
   refreshToken String?
   Student      Student[]
 }
@@ -68,7 +69,6 @@ model Student {
   grade                  String?
   remarks                String?
   Programs               PROGRAMS?
-  imageUrl               String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

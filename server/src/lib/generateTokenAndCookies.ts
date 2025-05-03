@@ -10,7 +10,7 @@ export const generateTokenAndSetCookie = (
   const isSafari = /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
 
   const token = jwt.sign({ userId }, process.env.JWT_SECRET as string, {
-    expiresIn: "5h",
+    expiresIn: "1m",
   });
 
   res.cookie("jwt", token, {

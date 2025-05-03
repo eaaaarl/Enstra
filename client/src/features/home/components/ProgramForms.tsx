@@ -18,7 +18,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-import { Loader2, Upload } from "lucide-react";
+import { Loader2, Save, Upload } from "lucide-react";
 import { useCwtsForm } from "../hooks/useCwts";
 import { Link } from "react-router-dom";
 import { SelectBarangays } from "./SelectComponents/SelectBarangay";
@@ -95,12 +95,17 @@ function ProgramForms() {
                 </div>
               </div>
               <div className="mt-4">
-                <Button type="button" onClick={handleImageSubmit}>
+                <Button
+                  onClick={handleImageSubmit}
+                  disabled={isLoadingSave}
+                  className="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors flex items-center justify-center disabled:bg-blue-300"
+                >
                   {isLoadingSave ? (
-                    <Loader2 className="h-4 w-4 animate-spin" />
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
                   ) : (
-                    "Save Image"
+                    <Save className="w-4 h-4 mr-2" />
                   )}
+                  {isLoadingSave ? "Saving..." : "Save Medical Certificate"}
                 </Button>
               </div>
             </>

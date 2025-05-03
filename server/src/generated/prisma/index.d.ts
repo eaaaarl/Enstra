@@ -1025,6 +1025,7 @@ export namespace Prisma {
     studentId: string | null
     name: string | null
     avatarUrl: string | null
+    imageUrl: string | null
     refreshToken: string | null
   }
 
@@ -1035,6 +1036,7 @@ export namespace Prisma {
     studentId: string | null
     name: string | null
     avatarUrl: string | null
+    imageUrl: string | null
     refreshToken: string | null
   }
 
@@ -1045,6 +1047,7 @@ export namespace Prisma {
     studentId: number
     name: number
     avatarUrl: number
+    imageUrl: number
     refreshToken: number
     _all: number
   }
@@ -1057,6 +1060,7 @@ export namespace Prisma {
     studentId?: true
     name?: true
     avatarUrl?: true
+    imageUrl?: true
     refreshToken?: true
   }
 
@@ -1067,6 +1071,7 @@ export namespace Prisma {
     studentId?: true
     name?: true
     avatarUrl?: true
+    imageUrl?: true
     refreshToken?: true
   }
 
@@ -1077,6 +1082,7 @@ export namespace Prisma {
     studentId?: true
     name?: true
     avatarUrl?: true
+    imageUrl?: true
     refreshToken?: true
     _all?: true
   }
@@ -1160,6 +1166,7 @@ export namespace Prisma {
     studentId: string | null
     name: string | null
     avatarUrl: string | null
+    imageUrl: string | null
     refreshToken: string | null
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
@@ -1187,6 +1194,7 @@ export namespace Prisma {
     studentId?: boolean
     name?: boolean
     avatarUrl?: boolean
+    imageUrl?: boolean
     refreshToken?: boolean
     Student?: boolean | User$StudentArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1199,6 +1207,7 @@ export namespace Prisma {
     studentId?: boolean
     name?: boolean
     avatarUrl?: boolean
+    imageUrl?: boolean
     refreshToken?: boolean
   }, ExtArgs["result"]["user"]>
 
@@ -1209,6 +1218,7 @@ export namespace Prisma {
     studentId?: boolean
     name?: boolean
     avatarUrl?: boolean
+    imageUrl?: boolean
     refreshToken?: boolean
   }, ExtArgs["result"]["user"]>
 
@@ -1219,10 +1229,11 @@ export namespace Prisma {
     studentId?: boolean
     name?: boolean
     avatarUrl?: boolean
+    imageUrl?: boolean
     refreshToken?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "studentId" | "name" | "avatarUrl" | "refreshToken", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "studentId" | "name" | "avatarUrl" | "imageUrl" | "refreshToken", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Student?: boolean | User$StudentArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1242,6 +1253,7 @@ export namespace Prisma {
       studentId: string | null
       name: string | null
       avatarUrl: string | null
+      imageUrl: string | null
       refreshToken: string | null
     }, ExtArgs["result"]["user"]>
     composites: {}
@@ -1673,6 +1685,7 @@ export namespace Prisma {
     readonly studentId: FieldRef<"User", 'String'>
     readonly name: FieldRef<"User", 'String'>
     readonly avatarUrl: FieldRef<"User", 'String'>
+    readonly imageUrl: FieldRef<"User", 'String'>
     readonly refreshToken: FieldRef<"User", 'String'>
   }
     
@@ -2151,7 +2164,6 @@ export namespace Prisma {
     grade: string | null
     remarks: string | null
     Programs: $Enums.PROGRAMS | null
-    imageUrl: string | null
     createdAt: Date | null
     updatedAt: Date | null
     userId: string | null
@@ -2194,7 +2206,6 @@ export namespace Prisma {
     grade: string | null
     remarks: string | null
     Programs: $Enums.PROGRAMS | null
-    imageUrl: string | null
     createdAt: Date | null
     updatedAt: Date | null
     userId: string | null
@@ -2237,7 +2248,6 @@ export namespace Prisma {
     grade: number
     remarks: number
     Programs: number
-    imageUrl: number
     createdAt: number
     updatedAt: number
     userId: number
@@ -2282,7 +2292,6 @@ export namespace Prisma {
     grade?: true
     remarks?: true
     Programs?: true
-    imageUrl?: true
     createdAt?: true
     updatedAt?: true
     userId?: true
@@ -2325,7 +2334,6 @@ export namespace Prisma {
     grade?: true
     remarks?: true
     Programs?: true
-    imageUrl?: true
     createdAt?: true
     updatedAt?: true
     userId?: true
@@ -2368,7 +2376,6 @@ export namespace Prisma {
     grade?: true
     remarks?: true
     Programs?: true
-    imageUrl?: true
     createdAt?: true
     updatedAt?: true
     userId?: true
@@ -2484,7 +2491,6 @@ export namespace Prisma {
     grade: string | null
     remarks: string | null
     Programs: $Enums.PROGRAMS | null
-    imageUrl: string | null
     createdAt: Date
     updatedAt: Date
     userId: string | null
@@ -2544,7 +2550,6 @@ export namespace Prisma {
     grade?: boolean
     remarks?: boolean
     Programs?: boolean
-    imageUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
@@ -2588,7 +2593,6 @@ export namespace Prisma {
     grade?: boolean
     remarks?: boolean
     Programs?: boolean
-    imageUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
@@ -2632,7 +2636,6 @@ export namespace Prisma {
     grade?: boolean
     remarks?: boolean
     Programs?: boolean
-    imageUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
@@ -2676,13 +2679,12 @@ export namespace Prisma {
     grade?: boolean
     remarks?: boolean
     Programs?: boolean
-    imageUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
   }
 
-  export type StudentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "student_id" | "lastname" | "firstname" | "middlename" | "suffix" | "gender" | "date_birth" | "place_birth" | "phone_number" | "email" | "department" | "course" | "school" | "religion" | "weight" | "height" | "complexion" | "blood_type" | "street_address" | "city" | "state_province" | "postal_code" | "mothers_name" | "mothers_occupation" | "fathers_name" | "fathers_occupation" | "emergency_name" | "emergency_relationship" | "emergency_address" | "emergency_phonenumber" | "semester" | "school_year" | "grade" | "remarks" | "Programs" | "imageUrl" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["student"]>
+  export type StudentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "student_id" | "lastname" | "firstname" | "middlename" | "suffix" | "gender" | "date_birth" | "place_birth" | "phone_number" | "email" | "department" | "course" | "school" | "religion" | "weight" | "height" | "complexion" | "blood_type" | "street_address" | "city" | "state_province" | "postal_code" | "mothers_name" | "mothers_occupation" | "fathers_name" | "fathers_occupation" | "emergency_name" | "emergency_relationship" | "emergency_address" | "emergency_phonenumber" | "semester" | "school_year" | "grade" | "remarks" | "Programs" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["student"]>
   export type StudentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Student$userArgs<ExtArgs>
   }
@@ -2735,7 +2737,6 @@ export namespace Prisma {
       grade: string | null
       remarks: string | null
       Programs: $Enums.PROGRAMS | null
-      imageUrl: string | null
       createdAt: Date
       updatedAt: Date
       userId: string | null
@@ -3199,7 +3200,6 @@ export namespace Prisma {
     readonly grade: FieldRef<"Student", 'String'>
     readonly remarks: FieldRef<"Student", 'String'>
     readonly Programs: FieldRef<"Student", 'PROGRAMS'>
-    readonly imageUrl: FieldRef<"Student", 'String'>
     readonly createdAt: FieldRef<"Student", 'DateTime'>
     readonly updatedAt: FieldRef<"Student", 'DateTime'>
     readonly userId: FieldRef<"Student", 'String'>
@@ -3657,6 +3657,7 @@ export namespace Prisma {
     studentId: 'studentId',
     name: 'name',
     avatarUrl: 'avatarUrl',
+    imageUrl: 'imageUrl',
     refreshToken: 'refreshToken'
   };
 
@@ -3700,7 +3701,6 @@ export namespace Prisma {
     grade: 'grade',
     remarks: 'remarks',
     Programs: 'Programs',
-    imageUrl: 'imageUrl',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     userId: 'userId'
@@ -3807,6 +3807,7 @@ export namespace Prisma {
     studentId?: StringNullableFilter<"User"> | string | null
     name?: StringNullableFilter<"User"> | string | null
     avatarUrl?: StringNullableFilter<"User"> | string | null
+    imageUrl?: StringNullableFilter<"User"> | string | null
     refreshToken?: StringNullableFilter<"User"> | string | null
     Student?: StudentListRelationFilter
   }
@@ -3818,6 +3819,7 @@ export namespace Prisma {
     studentId?: SortOrderInput | SortOrder
     name?: SortOrderInput | SortOrder
     avatarUrl?: SortOrderInput | SortOrder
+    imageUrl?: SortOrderInput | SortOrder
     refreshToken?: SortOrderInput | SortOrder
     Student?: StudentOrderByRelationAggregateInput
   }
@@ -3832,6 +3834,7 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     name?: StringNullableFilter<"User"> | string | null
     avatarUrl?: StringNullableFilter<"User"> | string | null
+    imageUrl?: StringNullableFilter<"User"> | string | null
     refreshToken?: StringNullableFilter<"User"> | string | null
     Student?: StudentListRelationFilter
   }, "id" | "email" | "studentId">
@@ -3843,6 +3846,7 @@ export namespace Prisma {
     studentId?: SortOrderInput | SortOrder
     name?: SortOrderInput | SortOrder
     avatarUrl?: SortOrderInput | SortOrder
+    imageUrl?: SortOrderInput | SortOrder
     refreshToken?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -3859,6 +3863,7 @@ export namespace Prisma {
     studentId?: StringNullableWithAggregatesFilter<"User"> | string | null
     name?: StringNullableWithAggregatesFilter<"User"> | string | null
     avatarUrl?: StringNullableWithAggregatesFilter<"User"> | string | null
+    imageUrl?: StringNullableWithAggregatesFilter<"User"> | string | null
     refreshToken?: StringNullableWithAggregatesFilter<"User"> | string | null
   }
 
@@ -3902,7 +3907,6 @@ export namespace Prisma {
     grade?: StringNullableFilter<"Student"> | string | null
     remarks?: StringNullableFilter<"Student"> | string | null
     Programs?: EnumPROGRAMSNullableFilter<"Student"> | $Enums.PROGRAMS | null
-    imageUrl?: StringNullableFilter<"Student"> | string | null
     createdAt?: DateTimeFilter<"Student"> | Date | string
     updatedAt?: DateTimeFilter<"Student"> | Date | string
     userId?: StringNullableFilter<"Student"> | string | null
@@ -3946,7 +3950,6 @@ export namespace Prisma {
     grade?: SortOrderInput | SortOrder
     remarks?: SortOrderInput | SortOrder
     Programs?: SortOrderInput | SortOrder
-    imageUrl?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrderInput | SortOrder
@@ -3994,7 +3997,6 @@ export namespace Prisma {
     grade?: StringNullableFilter<"Student"> | string | null
     remarks?: StringNullableFilter<"Student"> | string | null
     Programs?: EnumPROGRAMSNullableFilter<"Student"> | $Enums.PROGRAMS | null
-    imageUrl?: StringNullableFilter<"Student"> | string | null
     createdAt?: DateTimeFilter<"Student"> | Date | string
     updatedAt?: DateTimeFilter<"Student"> | Date | string
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -4037,7 +4039,6 @@ export namespace Prisma {
     grade?: SortOrderInput | SortOrder
     remarks?: SortOrderInput | SortOrder
     Programs?: SortOrderInput | SortOrder
-    imageUrl?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrderInput | SortOrder
@@ -4086,7 +4087,6 @@ export namespace Prisma {
     grade?: StringNullableWithAggregatesFilter<"Student"> | string | null
     remarks?: StringNullableWithAggregatesFilter<"Student"> | string | null
     Programs?: EnumPROGRAMSNullableWithAggregatesFilter<"Student"> | $Enums.PROGRAMS | null
-    imageUrl?: StringNullableWithAggregatesFilter<"Student"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Student"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Student"> | Date | string
     userId?: StringNullableWithAggregatesFilter<"Student"> | string | null
@@ -4099,6 +4099,7 @@ export namespace Prisma {
     studentId?: string | null
     name?: string | null
     avatarUrl?: string | null
+    imageUrl?: string | null
     refreshToken?: string | null
     Student?: StudentCreateNestedManyWithoutUserInput
   }
@@ -4110,6 +4111,7 @@ export namespace Prisma {
     studentId?: string | null
     name?: string | null
     avatarUrl?: string | null
+    imageUrl?: string | null
     refreshToken?: string | null
     Student?: StudentUncheckedCreateNestedManyWithoutUserInput
   }
@@ -4121,6 +4123,7 @@ export namespace Prisma {
     studentId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     Student?: StudentUpdateManyWithoutUserNestedInput
   }
@@ -4132,6 +4135,7 @@ export namespace Prisma {
     studentId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     Student?: StudentUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -4143,6 +4147,7 @@ export namespace Prisma {
     studentId?: string | null
     name?: string | null
     avatarUrl?: string | null
+    imageUrl?: string | null
     refreshToken?: string | null
   }
 
@@ -4153,6 +4158,7 @@ export namespace Prisma {
     studentId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -4163,6 +4169,7 @@ export namespace Prisma {
     studentId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -4203,7 +4210,6 @@ export namespace Prisma {
     grade?: string | null
     remarks?: string | null
     Programs?: $Enums.PROGRAMS | null
-    imageUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user?: UserCreateNestedOneWithoutStudentInput
@@ -4246,7 +4252,6 @@ export namespace Prisma {
     grade?: string | null
     remarks?: string | null
     Programs?: $Enums.PROGRAMS | null
-    imageUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     userId?: string | null
@@ -4289,7 +4294,6 @@ export namespace Prisma {
     grade?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     Programs?: NullableEnumPROGRAMSFieldUpdateOperationsInput | $Enums.PROGRAMS | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutStudentNestedInput
@@ -4332,7 +4336,6 @@ export namespace Prisma {
     grade?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     Programs?: NullableEnumPROGRAMSFieldUpdateOperationsInput | $Enums.PROGRAMS | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -4375,7 +4378,6 @@ export namespace Prisma {
     grade?: string | null
     remarks?: string | null
     Programs?: $Enums.PROGRAMS | null
-    imageUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     userId?: string | null
@@ -4418,7 +4420,6 @@ export namespace Prisma {
     grade?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     Programs?: NullableEnumPROGRAMSFieldUpdateOperationsInput | $Enums.PROGRAMS | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -4460,7 +4461,6 @@ export namespace Prisma {
     grade?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     Programs?: NullableEnumPROGRAMSFieldUpdateOperationsInput | $Enums.PROGRAMS | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -4518,6 +4518,7 @@ export namespace Prisma {
     studentId?: SortOrder
     name?: SortOrder
     avatarUrl?: SortOrder
+    imageUrl?: SortOrder
     refreshToken?: SortOrder
   }
 
@@ -4528,6 +4529,7 @@ export namespace Prisma {
     studentId?: SortOrder
     name?: SortOrder
     avatarUrl?: SortOrder
+    imageUrl?: SortOrder
     refreshToken?: SortOrder
   }
 
@@ -4538,6 +4540,7 @@ export namespace Prisma {
     studentId?: SortOrder
     name?: SortOrder
     avatarUrl?: SortOrder
+    imageUrl?: SortOrder
     refreshToken?: SortOrder
   }
 
@@ -4637,7 +4640,6 @@ export namespace Prisma {
     grade?: SortOrder
     remarks?: SortOrder
     Programs?: SortOrder
-    imageUrl?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
@@ -4680,7 +4682,6 @@ export namespace Prisma {
     grade?: SortOrder
     remarks?: SortOrder
     Programs?: SortOrder
-    imageUrl?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
@@ -4723,7 +4724,6 @@ export namespace Prisma {
     grade?: SortOrder
     remarks?: SortOrder
     Programs?: SortOrder
-    imageUrl?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
@@ -4990,7 +4990,6 @@ export namespace Prisma {
     grade?: string | null
     remarks?: string | null
     Programs?: $Enums.PROGRAMS | null
-    imageUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -5032,7 +5031,6 @@ export namespace Prisma {
     grade?: string | null
     remarks?: string | null
     Programs?: $Enums.PROGRAMS | null
-    imageUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -5103,7 +5101,6 @@ export namespace Prisma {
     grade?: StringNullableFilter<"Student"> | string | null
     remarks?: StringNullableFilter<"Student"> | string | null
     Programs?: EnumPROGRAMSNullableFilter<"Student"> | $Enums.PROGRAMS | null
-    imageUrl?: StringNullableFilter<"Student"> | string | null
     createdAt?: DateTimeFilter<"Student"> | Date | string
     updatedAt?: DateTimeFilter<"Student"> | Date | string
     userId?: StringNullableFilter<"Student"> | string | null
@@ -5116,6 +5113,7 @@ export namespace Prisma {
     studentId?: string | null
     name?: string | null
     avatarUrl?: string | null
+    imageUrl?: string | null
     refreshToken?: string | null
   }
 
@@ -5126,6 +5124,7 @@ export namespace Prisma {
     studentId?: string | null
     name?: string | null
     avatarUrl?: string | null
+    imageUrl?: string | null
     refreshToken?: string | null
   }
 
@@ -5152,6 +5151,7 @@ export namespace Prisma {
     studentId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -5162,6 +5162,7 @@ export namespace Prisma {
     studentId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -5202,7 +5203,6 @@ export namespace Prisma {
     grade?: string | null
     remarks?: string | null
     Programs?: $Enums.PROGRAMS | null
-    imageUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -5244,7 +5244,6 @@ export namespace Prisma {
     grade?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     Programs?: NullableEnumPROGRAMSFieldUpdateOperationsInput | $Enums.PROGRAMS | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5286,7 +5285,6 @@ export namespace Prisma {
     grade?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     Programs?: NullableEnumPROGRAMSFieldUpdateOperationsInput | $Enums.PROGRAMS | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5328,7 +5326,6 @@ export namespace Prisma {
     grade?: NullableStringFieldUpdateOperationsInput | string | null
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     Programs?: NullableEnumPROGRAMSFieldUpdateOperationsInput | $Enums.PROGRAMS | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

@@ -71,9 +71,9 @@ export class StudentRepository {
     async updateImageCertificate({userId,imageUrl}: updateImageCertificate){
         try {
 
-                const updatedStudent = await this.prisma.student.update({
+                const updatedStudent = await this.prisma.user.update({
                     where: {
-                        userId: userId
+                        id: userId
                     },
                     data: {
                         imageUrl

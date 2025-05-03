@@ -26,14 +26,15 @@ export const useUploadImageCert = () => {
 
   const callSubmitImageCert = async () => {
     try {
-      console.log(imgFile);
       if (imgFile && user.id) {
         const res = await updateImageCert({
           userId: user.id,
           file: imgFile,
         }).unwrap();
 
-        console.log(res.imageCertificate);
+        toast(res.message);
+        setPreviewUrl(null);
+        setImgFile(null);
       }
     } catch (error: any) {
       toast.error(
@@ -52,6 +53,7 @@ export const useUploadImageCert = () => {
     handleFileChange,
     imgFile,
     previewUrl,
+    callSubmitImageCert,
     handleImageSubmit,
     isLoadingSave: isLoading,
   };
