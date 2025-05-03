@@ -24,7 +24,6 @@ function FormsPage() {
   const displayName =
     programDisplayNames[programName.toLowerCase() as "rotc" | "lts" | "cwts"] ||
     programName.toUpperCase();
-
   return (
     <div className="container max-w-5xl mx-auto p-6 bg-slate-50 min-h-screen">
       <Card className="shadow-xl border-0">
@@ -106,7 +105,7 @@ function FormsPage() {
             <h3 className="text-xl font-semibold text-slate-800 mb-4 text-center uppercase">
               Student Information
             </h3>
-            <ProgramForms />
+            <ProgramForms programs={displayName} />
           </div>
         </CardContent>
       </Card>

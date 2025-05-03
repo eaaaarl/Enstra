@@ -26,15 +26,9 @@ model User {
   Student      Student[]
 }
 
-enum PROGRAMS {
-  CWTS
-  LTS
-  ROTC
-}
-
 model Student {
-  id                     String    @id @default(uuid())
-  student_id             String    @unique
+  id                     String   @id @default(uuid())
+  student_id             String   @unique
   lastname               String
   firstname              String
   middlename             String?
@@ -43,7 +37,7 @@ model Student {
   date_birth             DateTime
   place_birth            String
   phone_number           String
-  email                  String    @unique
+  email                  String   @unique
   department             String
   course                 String
   school                 String
@@ -68,7 +62,7 @@ model Student {
   school_year            String
   grade                  String?
   remarks                String?
-  Programs               PROGRAMS?
+  Programs               String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

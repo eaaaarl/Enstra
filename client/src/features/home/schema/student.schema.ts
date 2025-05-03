@@ -40,6 +40,7 @@ export const studentSchema = z.object({
   school_year: z.string().min(1, "School year is required"),
   grade: z.string().optional(),
   remarks: z.string().optional(),
+  Programs: z.enum(["LTS", "CWTS", "ROTC"]).optional(),
 });
 
 export type studentPayload = z.infer<typeof studentSchema>;

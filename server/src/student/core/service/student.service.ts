@@ -3,14 +3,14 @@ import { uploadImage } from "../../../lib/cloudinary";
 import { NotFoundError, ValidationError } from "../../../lib/customErrors";
 import { StudentRepository } from "../../student.repository";
 import { FileInput } from "../interface/IStudent.repository";
-import { studentSchema } from "../schema/student.schema";
+import { studentDTO, studentSchema } from "../schema/student.schema";
 
 
 
 export class StudentService {
     constructor(private readonly studentRepository: StudentRepository) {}
 
-    async createStudentCwts (data: Prisma.StudentCreateInput,userId:string) {
+    async createStudentCwts (data: studentDTO,userId:string) {
        const payload = studentSchema.parse(data);
        const existingStudent = await this.studentRepository.findByStudentId(payload.student_id)
         const existingEmailStudent = await this.studentRepository.findByStudentEmail(payload.email)
