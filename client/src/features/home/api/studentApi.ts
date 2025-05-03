@@ -1,5 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { studentPayload } from "../schema/student.schema";
+import {
+  getStatusRegistrationPaylod,
+  getStatusRegistrationResponse,
+} from "./api.interface";
 
 const BASE_URL = "http://localhost:3001/api";
 
@@ -22,7 +26,6 @@ export const studentApi = createApi({
         body: data,
       }),
     }),
-
     uploadImageCertificate: build.mutation<
       { message: string; imageCertificate: string },
       { userId: string; file: File }
@@ -37,10 +40,23 @@ export const studentApi = createApi({
         };
       },
     }),
+
+    getStatusRegistration: build.query<
+      getStatusRegistrationResponse,
+      getStatusRegistrationPaylod
+    >({
+      query: ({ studentId }) => {
+        return {
+          url: `/${studentId}/check-registration`,
+          method: "GET",
+        };
+      },
+    }),
   }),
 });
 
 export const {
   useCreateStudentCwtsMutation,
   useUploadImageCertificateMutation,
+  useGetStatusRegistrationQuery,
 } = studentApi;

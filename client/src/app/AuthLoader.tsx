@@ -22,7 +22,7 @@ function AuthLoader({ children }: AuthLoaderProps) {
     }
   }, [data, isError, isLoading, dispatch, signOut]);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return null;
 
   return <>{children}</>;
 }

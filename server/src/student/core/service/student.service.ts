@@ -1,4 +1,3 @@
-import { Prisma } from "../../../generated/prisma";
 import { uploadImage } from "../../../lib/cloudinary";
 import { NotFoundError, ValidationError } from "../../../lib/customErrors";
 import { StudentRepository } from "../../student.repository";
@@ -39,5 +38,10 @@ export class StudentService {
         const updatedImageCertificate = await this.studentRepository.updateImageCertificate({userId, imageUrl})
 
         return updatedImageCertificate
+    }
+
+    async getStudentProgramRegistrationStatus({studentId}: {studentId:string}) {
+        const getStudentRegStat = await this.studentRepository.findByStudentId(studentId)
+        return getStudentRegStat
     }
 }

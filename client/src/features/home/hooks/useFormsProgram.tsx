@@ -8,7 +8,7 @@ import { useCreateStudentCwtsMutation } from "../api/studentApi";
 import { toast } from "sonner";
 import { studentPayload, studentSchema } from "../schema/student.schema";
 
-export const useCwtsForm = () => {
+export const useFormsProgram = () => {
   const form = useForm({
     resolver: zodResolver(studentSchema),
     defaultValues: {

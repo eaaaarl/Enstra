@@ -1,4 +1,3 @@
-import { GalleryVerticalEnd } from "lucide-react";
 import { Outlet } from "react-router-dom";
 
 function AuthLayout() {
@@ -7,10 +6,16 @@ function AuthLayout() {
       <div className="flex flex-col gap-4 p-6 md:p-10">
         <div className="flex justify-center gap-2 md:justify-start">
           <a href="#" className="flex items-center gap-2 font-medium">
-            <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
-              <GalleryVerticalEnd className="size-4" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-md bg-primary text-primary-foreground">
+              <img
+                src="https://res.cloudinary.com/dzl4yhak4/image/upload/v1746282807/zpkie8yyjd2c4zlz58vo.jpg"
+                height={200}
+                width={200}
+              />
             </div>
-            Acme Inc.
+            <span className="uppercase text-blue-600 font-bold text-2xl border-b-3 border-b-blue-500 ">
+              ENSTRA.
+            </span>
           </a>
         </div>
         <div className="flex flex-1 items-center justify-center">
@@ -21,7 +26,7 @@ function AuthLayout() {
       </div>
       <div className="relative hidden bg-muted lg:block">
         <img
-          src="/placeholder.svg"
+          src="https://res.cloudinary.com/dzl4yhak4/image/upload/v1746282676/bijns20bwjyx3xujk8ly.jpg"
           alt="Image"
           className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
         />

@@ -1,21 +1,19 @@
 import { passwordCompare, passwordHash } from "../../../lib/bcrypt";
 import { AuthenticationError, ValidationError } from "../../../lib/customErrors";
 import { verifyToken } from "../../../lib/verifyToken";
-import { signInData, signUpData } from "../entity/auth";
-import { IAuthRepository } from "../interface/IAuth.repository";
-import { signInSchema, userSchema } from "../schema/auth";
+import { AuthRepository } from "../../auth.repository";
+import { signInDTO, signInSchema, signUpDTO, userSchema } from "../schema/auth";
 
 
 
 export class AuthService {
-   constructor(private readonly authRespository: IAuthRepository) {}
+   constructor(private readonly authRespository: AuthRepository) {}
 
+   async signUp(signUpData: signUpDTO){
+        const payload = userSchema.parse(signUpData)
+        const existingUser = await this.authRespository.findByEmail(payload.email)
 
-   async signUp(signUpData: signUpData){
-        const {email,name,password,studentId} = userSchema.parse(signUpData)
-        const existingUser = await this.authRespository.findByEmail(email)
-
-        const existingStudentId = await this.authRespository.findByStudentId(studentId)
+        const existingStudentId = await this.authRespository.findByStudentId(payload.studentId)
         if (existingUser) {
             throw new ValidationError("Email already exists")
         }
@@ -24,20 +22,18 @@ export class AuthService {
             throw new ValidationError("Student ID already exists")
         }
 
-        const toHashPassword = passwordHash(password)
+        const toHashPassword = passwordHash(payload.password)
 
         const newUser = await this.authRespository.createUser({
-            email,
-            name,
-            password:toHashPassword,
-            studentId
+           ...payload,
+           password: toHashPassword
         })
        
 
         return newUser;
    }
 
-   async signIn(signInData: signInData) {
+   async signIn(signInData: signInDTO) {
         const { email, password } = signInSchema.parse(signInData);
         const user = await this.authRespository.findByEmail(email);
         if (!user) {
@@ -63,10 +59,7 @@ export class AuthService {
       const user = await this.authRespository.findById(decoded.userId);
       if (user) {
         return {
-          id: user.id,
-          email: user.email,
-          studentId: user.studentId,
-          name: user.name,
+          ...user
         };
       }
     } catch (error) {

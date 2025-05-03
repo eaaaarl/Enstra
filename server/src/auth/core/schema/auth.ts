@@ -1,8 +1,5 @@
 
-
-
 import z from 'zod';
-
 
 export const userSchema = z.object({
     name: z.string().min(1, { message: 'Name is required' }),
@@ -16,3 +13,5 @@ export const signInSchema = z.object({
     password: z.string().min(8, { message: 'Password must be at least 8 characters long' })
 })
 
+export type signUpDTO = z.infer<typeof userSchema>
+export type signInDTO = z.infer<typeof signInSchema>
