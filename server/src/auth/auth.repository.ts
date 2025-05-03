@@ -3,7 +3,6 @@ import { DatabaseError } from "../lib/customErrors";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { signUpDTO } from "./core/schema/auth";
 
-
 export class AuthRepository {
     private prisma = new PrismaClient()
     
@@ -103,7 +102,7 @@ export class AuthRepository {
           if (!user) {
               return null;
           }
-          
+
           return user
         } catch (error) {
           if(error instanceof PrismaClientKnownRequestError) {
