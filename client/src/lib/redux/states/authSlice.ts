@@ -7,6 +7,7 @@ export interface UserState {
   email: string;
   studentId: string;
   avatarUrl?: string;
+  role: string;
 }
 
 const initialState: UserState = {
@@ -15,6 +16,7 @@ const initialState: UserState = {
   name: "",
   studentId: "",
   avatarUrl: "",
+  role: "",
 };
 
 export const authSlice = createSlice({
@@ -27,6 +29,7 @@ export const authSlice = createSlice({
       state.name = action.payload.name;
       state.studentId = action.payload.studentId;
       state.avatarUrl = action.payload.avatarUrl;
+      state.role = action.payload.Role;
     },
     clearUser: (state) => {
       state.id = "";
@@ -34,6 +37,7 @@ export const authSlice = createSlice({
       state.name = "";
       state.studentId = "";
       state.avatarUrl = "";
+      state.role = "";
     },
   },
 });

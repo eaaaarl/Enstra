@@ -7,11 +7,13 @@ import { useAppSelector } from "@/lib/redux/hooks";
 import { appRoutes } from "./routes/appRoutes";
 import React from "react";
 import AuthLoader from "./AuthLoader";
+import { SignUpForm } from "@/features/home";
+import AppLayout from "@/components/Layout/AppLayout";
+import DashboardPage from "@/components/Pages/Admin/DashboardPage";
 
 function App() {
   const authUser = useAppSelector((state) => state.auth);
-  const authHomePage = "/home";
-
+  const authStudentHomePage = "/home";
   return (
     <AuthLoader>
       <Routes>
@@ -21,16 +23,31 @@ function App() {
             path="/"
             index
             element={
-              authUser.id ? <Navigate to={authHomePage} /> : <SignInForm />
+              authUser.id ? (
+                <Navigate to={authStudentHomePage} />
+              ) : (
+                <SignInForm />
+              )
+            }
+          />
+          <Route
+            path="/signup"
+            index
+            element={
+              authUser.id ? (
+                <Navigate to={authStudentHomePage} />
+              ) : (
+                <SignUpForm />
+              )
             }
           />
         </Route>
 
-        {/* Protected Route */}
+        {/* Student Route */}
 
         <Route
           element={
-            <ProtectedRoute user={authUser}>
+            <ProtectedRoute user={authUser} requiredRole="STUDENT">
               <HomeLayout />
             </ProtectedRoute>
           }
@@ -42,6 +59,17 @@ function App() {
               element={React.createElement(route.element)}
             />
           ))}
+        </Route>
+
+        {/* Admin Route */}
+        <Route
+          element={
+            <ProtectedRoute user={authUser} requiredRole="ADMIN">
+              <AppLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route path="/dashboard" element={<DashboardPage />} />
         </Route>
       </Routes>
     </AuthLoader>

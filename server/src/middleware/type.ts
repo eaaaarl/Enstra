@@ -7,6 +7,7 @@ export interface SafeUser {
     studentId?: string;
     name: string;
     avatarUrl?:string;
+    Role:string;
 }
 
 export interface CustomRequest extends Request {
