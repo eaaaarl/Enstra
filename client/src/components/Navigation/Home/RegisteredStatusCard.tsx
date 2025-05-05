@@ -43,7 +43,15 @@ export default function RegisteredStatusCard({
             <FileText className="text-green-600 w-4 h-4 mt-0.5" />
             <div>
               <p className="text-xs font-medium text-slate-500">Program</p>
-              <p className="text-sm font-semibold text-slate-800">{program}</p>
+              <p className="text-sm font-semibold text-slate-800">
+                {program == "CWTS"
+                  ? "Civic Welfare Training Service (CWTS)"
+                  : program == "LTS"
+                  ? "Literacy Training Service (LTS)"
+                  : program == "ROTC"
+                  ? "Reserve Officers' Training Corps (ROTC)"
+                  : ""}
+              </p>
             </div>
           </div>
 

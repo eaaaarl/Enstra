@@ -14,6 +14,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  STUDENT
+  ADMIN
+  PUBLIC
+}
+
 model User {
   id           String   @id @default(uuid())
   email        String   @unique
@@ -24,6 +30,7 @@ model User {
   imageUrl     String?
   refreshToken String?
   Student      Student?
+  Role         Role
 }
 
 model Student {

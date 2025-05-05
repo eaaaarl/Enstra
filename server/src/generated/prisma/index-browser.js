@@ -125,7 +125,8 @@ exports.Prisma.UserScalarFieldEnum = {
   name: 'name',
   avatarUrl: 'avatarUrl',
   imageUrl: 'imageUrl',
-  refreshToken: 'refreshToken'
+  refreshToken: 'refreshToken',
+  Role: 'Role'
 };
 
 exports.Prisma.StudentScalarFieldEnum = {
@@ -184,7 +185,11 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-
+exports.Role = exports.$Enums.Role = {
+  STUDENT: 'STUDENT',
+  ADMIN: 'ADMIN',
+  PUBLIC: 'PUBLIC'
+};
 
 exports.Prisma.ModelName = {
   User: 'User',

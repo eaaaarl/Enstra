@@ -22,6 +22,7 @@ export const useSignIn = () => {
   const callSignIn = async (payload: signInValues) => {
     try {
       const res = await signIn(payload).unwrap();
+      console.log(res);
       const authuser = res.data;
       dispatch(setUser(authuser));
       toast.success(res.message);

@@ -9,13 +9,17 @@ export class AuthRepository {
     async createUser(payload: signUpDTO) {
         try {
             const newUser = await this.prisma.user.create({
-                data: payload,
+                data: {
+                  ...payload, 
+                  Role:'STUDENT'
+                },
                 select: {
                   id: true,
                   name: true,
                   studentId: true,
                   avatarUrl: true,
                   email: true,
+                  Role: true
                 }
             })
             
@@ -40,7 +44,8 @@ export class AuthRepository {
               studentId: true,
               avatarUrl: true,
               email: true,
-              password: true
+              password: true,
+              Role: true,
             }
         })
 
@@ -69,6 +74,7 @@ export class AuthRepository {
                 studentId: true,
                 avatarUrl: true,
                 email: true,
+                Role:true,
               }
           })
   

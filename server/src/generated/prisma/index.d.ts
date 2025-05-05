@@ -25,6 +25,24 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 export type Student = $Result.DefaultSelection<Prisma.$StudentPayload>
 
 /**
+ * Enums
+ */
+export namespace $Enums {
+  export const Role: {
+  STUDENT: 'STUDENT',
+  ADMIN: 'ADMIN',
+  PUBLIC: 'PUBLIC'
+};
+
+export type Role = (typeof Role)[keyof typeof Role]
+
+}
+
+export type Role = $Enums.Role
+
+export const Role: typeof $Enums.Role
+
+/**
  * ##  Prisma Client ʲˢ
  *
  * Type-safe database client for TypeScript & Node.js
@@ -979,6 +997,7 @@ export namespace Prisma {
     avatarUrl: string | null
     imageUrl: string | null
     refreshToken: string | null
+    Role: $Enums.Role | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -990,6 +1009,7 @@ export namespace Prisma {
     avatarUrl: string | null
     imageUrl: string | null
     refreshToken: string | null
+    Role: $Enums.Role | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1001,6 +1021,7 @@ export namespace Prisma {
     avatarUrl: number
     imageUrl: number
     refreshToken: number
+    Role: number
     _all: number
   }
 
@@ -1014,6 +1035,7 @@ export namespace Prisma {
     avatarUrl?: true
     imageUrl?: true
     refreshToken?: true
+    Role?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -1025,6 +1047,7 @@ export namespace Prisma {
     avatarUrl?: true
     imageUrl?: true
     refreshToken?: true
+    Role?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -1036,6 +1059,7 @@ export namespace Prisma {
     avatarUrl?: true
     imageUrl?: true
     refreshToken?: true
+    Role?: true
     _all?: true
   }
 
@@ -1120,6 +1144,7 @@ export namespace Prisma {
     avatarUrl: string | null
     imageUrl: string | null
     refreshToken: string | null
+    Role: $Enums.Role
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -1148,6 +1173,7 @@ export namespace Prisma {
     avatarUrl?: boolean
     imageUrl?: boolean
     refreshToken?: boolean
+    Role?: boolean
     Student?: boolean | User$StudentArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1160,6 +1186,7 @@ export namespace Prisma {
     avatarUrl?: boolean
     imageUrl?: boolean
     refreshToken?: boolean
+    Role?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1171,6 +1198,7 @@ export namespace Prisma {
     avatarUrl?: boolean
     imageUrl?: boolean
     refreshToken?: boolean
+    Role?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -1182,9 +1210,10 @@ export namespace Prisma {
     avatarUrl?: boolean
     imageUrl?: boolean
     refreshToken?: boolean
+    Role?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "studentId" | "name" | "avatarUrl" | "imageUrl" | "refreshToken", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "studentId" | "name" | "avatarUrl" | "imageUrl" | "refreshToken" | "Role", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Student?: boolean | User$StudentArgs<ExtArgs>
   }
@@ -1205,6 +1234,7 @@ export namespace Prisma {
       avatarUrl: string | null
       imageUrl: string | null
       refreshToken: string | null
+      Role: $Enums.Role
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1637,6 +1667,7 @@ export namespace Prisma {
     readonly avatarUrl: FieldRef<"User", 'String'>
     readonly imageUrl: FieldRef<"User", 'String'>
     readonly refreshToken: FieldRef<"User", 'String'>
+    readonly Role: FieldRef<"User", 'Role'>
   }
     
 
@@ -3603,7 +3634,8 @@ export namespace Prisma {
     name: 'name',
     avatarUrl: 'avatarUrl',
     imageUrl: 'imageUrl',
-    refreshToken: 'refreshToken'
+    refreshToken: 'refreshToken',
+    Role: 'Role'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -3698,6 +3730,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Role'
+   */
+  export type EnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role'>
+    
+
+
+  /**
+   * Reference to a field of type 'Role[]'
+   */
+  export type ListEnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role[]'>
+    
+
+
+  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -3740,6 +3786,7 @@ export namespace Prisma {
     avatarUrl?: StringNullableFilter<"User"> | string | null
     imageUrl?: StringNullableFilter<"User"> | string | null
     refreshToken?: StringNullableFilter<"User"> | string | null
+    Role?: EnumRoleFilter<"User"> | $Enums.Role
     Student?: XOR<StudentNullableScalarRelationFilter, StudentWhereInput> | null
   }
 
@@ -3752,6 +3799,7 @@ export namespace Prisma {
     avatarUrl?: SortOrderInput | SortOrder
     imageUrl?: SortOrderInput | SortOrder
     refreshToken?: SortOrderInput | SortOrder
+    Role?: SortOrder
     Student?: StudentOrderByWithRelationInput
   }
 
@@ -3767,6 +3815,7 @@ export namespace Prisma {
     avatarUrl?: StringNullableFilter<"User"> | string | null
     imageUrl?: StringNullableFilter<"User"> | string | null
     refreshToken?: StringNullableFilter<"User"> | string | null
+    Role?: EnumRoleFilter<"User"> | $Enums.Role
     Student?: XOR<StudentNullableScalarRelationFilter, StudentWhereInput> | null
   }, "id" | "email" | "studentId">
 
@@ -3779,6 +3828,7 @@ export namespace Prisma {
     avatarUrl?: SortOrderInput | SortOrder
     imageUrl?: SortOrderInput | SortOrder
     refreshToken?: SortOrderInput | SortOrder
+    Role?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -3796,6 +3846,7 @@ export namespace Prisma {
     avatarUrl?: StringNullableWithAggregatesFilter<"User"> | string | null
     imageUrl?: StringNullableWithAggregatesFilter<"User"> | string | null
     refreshToken?: StringNullableWithAggregatesFilter<"User"> | string | null
+    Role?: EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
   }
 
   export type StudentWhereInput = {
@@ -4032,6 +4083,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     imageUrl?: string | null
     refreshToken?: string | null
+    Role: $Enums.Role
     Student?: StudentCreateNestedOneWithoutUserInput
   }
 
@@ -4044,6 +4096,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     imageUrl?: string | null
     refreshToken?: string | null
+    Role: $Enums.Role
     Student?: StudentUncheckedCreateNestedOneWithoutUserInput
   }
 
@@ -4056,6 +4109,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    Role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     Student?: StudentUpdateOneWithoutUserNestedInput
   }
 
@@ -4068,6 +4122,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    Role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     Student?: StudentUncheckedUpdateOneWithoutUserNestedInput
   }
 
@@ -4080,6 +4135,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     imageUrl?: string | null
     refreshToken?: string | null
+    Role: $Enums.Role
   }
 
   export type UserUpdateManyMutationInput = {
@@ -4091,6 +4147,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    Role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -4102,6 +4159,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    Role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }
 
   export type StudentCreateInput = {
@@ -4427,6 +4485,13 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type EnumRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
+  }
+
   export type StudentNullableScalarRelationFilter = {
     is?: StudentWhereInput | null
     isNot?: StudentWhereInput | null
@@ -4446,6 +4511,7 @@ export namespace Prisma {
     avatarUrl?: SortOrder
     imageUrl?: SortOrder
     refreshToken?: SortOrder
+    Role?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -4457,6 +4523,7 @@ export namespace Prisma {
     avatarUrl?: SortOrder
     imageUrl?: SortOrder
     refreshToken?: SortOrder
+    Role?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -4468,6 +4535,7 @@ export namespace Prisma {
     avatarUrl?: SortOrder
     imageUrl?: SortOrder
     refreshToken?: SortOrder
+    Role?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -4504,6 +4572,16 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type EnumRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleWithAggregatesFilter<$PrismaModel> | $Enums.Role
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRoleFilter<$PrismaModel>
+    _max?: NestedEnumRoleFilter<$PrismaModel>
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
@@ -4682,6 +4760,10 @@ export namespace Prisma {
     set?: string | null
   }
 
+  export type EnumRoleFieldUpdateOperationsInput = {
+    set?: $Enums.Role
+  }
+
   export type StudentUpdateOneWithoutUserNestedInput = {
     create?: XOR<StudentCreateWithoutUserInput, StudentUncheckedCreateWithoutUserInput>
     connectOrCreate?: StudentCreateOrConnectWithoutUserInput
@@ -4750,6 +4832,13 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedEnumRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
+  }
+
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -4804,6 +4893,16 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedEnumRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleWithAggregatesFilter<$PrismaModel> | $Enums.Role
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRoleFilter<$PrismaModel>
+    _max?: NestedEnumRoleFilter<$PrismaModel>
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -5020,6 +5119,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     imageUrl?: string | null
     refreshToken?: string | null
+    Role: $Enums.Role
   }
 
   export type UserUncheckedCreateWithoutStudentInput = {
@@ -5031,6 +5131,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     imageUrl?: string | null
     refreshToken?: string | null
+    Role: $Enums.Role
   }
 
   export type UserCreateOrConnectWithoutStudentInput = {
@@ -5058,6 +5159,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    Role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }
 
   export type UserUncheckedUpdateWithoutStudentInput = {
@@ -5069,6 +5171,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
+    Role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }
 
 
