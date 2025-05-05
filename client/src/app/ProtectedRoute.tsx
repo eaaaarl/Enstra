@@ -13,9 +13,12 @@ function ProtectedRoute({ children, user, requiredRole }: ProtectedRouteProps) {
     return <Navigate to="/" replace />;
   }
 
+  const authRole = user.role.toLowerCase();
+  const adminRoute = `/${authRole}/dashboard`;
+
   if (user.role !== requiredRole) {
     return (
-      <Navigate to={user.role === "ADMIN" ? "/dashboard" : "/home"} replace />
+      <Navigate to={user.role === "ADMIN" ? adminRoute : "/home"} replace />
     );
   }
 
