@@ -4,16 +4,16 @@ import { SignInForm } from "@/features/auth";
 import { Navigate, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import { useAppSelector } from "@/lib/redux/hooks";
-import { appRoutes } from "./routes/appRoutes";
+import { appAdminRoutes, appRoutes } from "./routes/appRoutes";
 import React from "react";
 import AuthLoader from "./AuthLoader";
 import { SignUpForm } from "@/features/home";
 import AppLayout from "@/components/Layout/AppLayout";
-import DashboardPage from "@/components/Pages/Admin/DashboardPage";
+import PageNotFound from "./PageNotFound";
 
 function App() {
   const authUser = useAppSelector((state) => state.auth);
-  const authStudentHomePage = "/home";
+  const authHomePage = "/home";
   return (
     <AuthLoader>
       <Routes>
@@ -23,28 +23,19 @@ function App() {
             path="/"
             index
             element={
-              authUser.id ? (
-                <Navigate to={authStudentHomePage} />
-              ) : (
-                <SignInForm />
-              )
+              authUser.id ? <Navigate to={authHomePage} /> : <SignInForm />
             }
           />
           <Route
             path="/signup"
             index
             element={
-              authUser.id ? (
-                <Navigate to={authStudentHomePage} />
-              ) : (
-                <SignUpForm />
-              )
+              authUser.id ? <Navigate to={authHomePage} /> : <SignUpForm />
             }
           />
         </Route>
 
         {/* Student Route */}
-
         <Route
           element={
             <ProtectedRoute user={authUser} requiredRole="STUDENT">
@@ -63,14 +54,23 @@ function App() {
 
         {/* Admin Route */}
         <Route
+          path="/admin"
           element={
             <ProtectedRoute user={authUser} requiredRole="ADMIN">
               <AppLayout />
             </ProtectedRoute>
           }
         >
-          <Route path="/dashboard" element={<DashboardPage />} />
+          {appAdminRoutes.map((route) => (
+            <Route
+              key={route.path}
+              path={route.path}
+              element={React.createElement(route.element)}
+            />
+          ))}
         </Route>
+
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </AuthLoader>
   );
