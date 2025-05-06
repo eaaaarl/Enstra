@@ -1,5 +1,5 @@
 import {
-  useCheckAuthQuery,
+  useCheckAdminAuthQuery,
   useSignOutMutation,
 } from "@/features/auth/api/authApi";
 import { useAppDispatch } from "@/lib/redux/hooks";
@@ -10,8 +10,8 @@ interface AuthLoaderProps {
   children: ReactNode;
 }
 
-function AuthLoader({ children }: AuthLoaderProps) {
-  const { data, isLoading, isError } = useCheckAuthQuery();
+function AuthAdminLoader({ children }: AuthLoaderProps) {
+  const { data, isLoading, isError } = useCheckAdminAuthQuery();
   const dispatch = useAppDispatch();
   const [signOut] = useSignOutMutation();
 
@@ -27,4 +27,4 @@ function AuthLoader({ children }: AuthLoaderProps) {
   return <>{children}</>;
 }
 
-export default AuthLoader;
+export default AuthAdminLoader;

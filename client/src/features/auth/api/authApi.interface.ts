@@ -3,6 +3,7 @@ export interface User {
   name: string;
   studentId: string;
   email: string;
+  role: string;
 }
 
 export interface SignUpResponse {

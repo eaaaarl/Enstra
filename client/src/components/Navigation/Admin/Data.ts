@@ -3,13 +3,13 @@ export const data = {
   navMain: [
     {
       title: "Dashboard",
-      url: "#",
+      url: "/admin/dashboard",
       icon: LayoutDashboard,
       isActive: true,
     },
     {
       title: "Student",
-      url: "#",
+      url: "/admin/student",
       icon: User,
       isActive: false,
     },

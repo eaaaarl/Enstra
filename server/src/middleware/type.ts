@@ -1,4 +1,5 @@
 import { Request } from "express";
+import { Role } from "../generated/prisma";
 
 
 export interface SafeUser {
@@ -7,7 +8,7 @@ export interface SafeUser {
     studentId?: string;
     name: string;
     avatarUrl?:string;
-    Role:string;
+    Role: Role;
 }
 
 export interface CustomRequest extends Request {

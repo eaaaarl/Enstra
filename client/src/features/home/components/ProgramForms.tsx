@@ -823,7 +823,7 @@ function ProgramForms({ programs }: ProgramFormsProps) {
           </div>
         </div>
         <div className="gap-2 flex justify-between">
-          <Link to={"/home"}>
+          <Link to={"/student/dashboard"}>
             <Button variant={"outline"}>Back</Button>
           </Link>
           <Button className="bg-blue-500 text-white hover:bg-blue-400">
