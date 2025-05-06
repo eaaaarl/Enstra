@@ -29,7 +29,7 @@ export class AuthController {
             const payload = req.body;
             const user = await this.authService.signIn(payload);
 
-            generateTokenAndSetCookie(user.id, req,res)
+            generateTokenAndSetCookie(user.id, user.Role, req,res)
 
             res.status(200).json({
                 message: "User logged in successfully",
@@ -67,5 +67,5 @@ export class AuthController {
         } catch (error) {
             next(error)
         }
-      }
+    }
 }   

@@ -1,15 +1,17 @@
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
+import { Role } from "../generated/prisma";
 
 export const generateTokenAndSetCookie = (
   userId: string,
+  userRole: Role,
   req: Request,
   res: Response
 ) => {
   const userAgent = req.headers["user-agent"] || "";
   const isSafari = /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
 
-  const token = jwt.sign({ userId }, process.env.JWT_SECRET as string, {
+  const token = jwt.sign({ userId , role: userRole}, process.env.JWT_SECRET as string, {
     expiresIn: "5h",
   });
 

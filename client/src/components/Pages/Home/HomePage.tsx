@@ -36,7 +36,9 @@ function HomePage() {
 
   const handleConfirmation = () => {
     if (selectedProgram) {
-      navigate(`/forms/${selectedProgram.toLowerCase()}`);
+      navigate(
+        `/${authUser.role.toLowerCase()}/forms/${selectedProgram.toLowerCase()}`
+      );
     }
   };
 

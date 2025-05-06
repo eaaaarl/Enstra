@@ -49,9 +49,17 @@ export const authApi = createApi({
         method: "POST",
       }),
     }),
-    checkAuth: build.query<CheckAuthResponse, void>({
+
+    checkStudentAuth: build.query<CheckAuthResponse, void>({
       query: () => ({
-        url: "/me",
+        url: "/student/me",
+        method: "GET",
+      }),
+    }),
+
+    checkAdminAuth: build.query<CheckAuthResponse, void>({
+      query: () => ({
+        url: "/admin/me",
         method: "GET",
       }),
     }),
@@ -62,5 +70,6 @@ export const {
   useSignUpMutation,
   useSignInMutation,
   useSignOutMutation,
-  useCheckAuthQuery,
+  useCheckStudentAuthQuery,
+  useCheckAdminAuthQuery,
 } = authApi;

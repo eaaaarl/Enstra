@@ -19,17 +19,22 @@ export const useSignIn = () => {
   const navigate = useNavigate();
   const [signIn, { isLoading }] = useSignInMutation();
   const dispatch = useAppDispatch();
+
   const callSignIn = async (payload: signInValues) => {
     try {
       const res = await signIn(payload).unwrap();
-      console.log(res);
       const authuser = res.data;
       dispatch(setUser(authuser));
       toast.success(res.message);
-      navigate("/home");
+
+      if (authuser.role === "ADMIN") {
+        navigate(`/${authuser.role.toLowerCase()}/dashboard`);
+      } else if (authuser.role === "STUDENT") {
+        navigate("/home");
+      }
     } catch (error: any) {
       toast.error(
-        error?.data?.message || "Failedt to sign in, Please try again"
+        error?.data?.message || "Failed to sign in, Please try again"
       );
     }
   };
