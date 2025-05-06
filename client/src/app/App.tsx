@@ -9,6 +9,7 @@ import React from "react";
 import AuthLoader from "./AuthLoader";
 import { SignUpForm } from "@/features/home";
 import AppLayout from "@/components/Layout/AppLayout";
+import PageNotFound from "./PageNotFound";
 
 function App() {
   const authUser = useAppSelector((state) => state.auth);
@@ -68,6 +69,8 @@ function App() {
             />
           ))}
         </Route>
+
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </AuthLoader>
   );
