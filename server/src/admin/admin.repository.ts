@@ -17,7 +17,6 @@ export class AdminRepository {
                 console.error(error)
                 throw new DatabaseError('Failed to get total student at getTotalStudent method')
             }
-
             throw error;
         }
     }

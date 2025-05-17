@@ -1,6 +1,6 @@
 import { Header } from "@/components/Navigation/Admin";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import StudentTable from "@/features/admin/components/StudentTable";
+import StudentTable from "@/features/admin/components/AdminStudentTable";
 
 function StudentPage() {
   return (
