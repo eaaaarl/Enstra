@@ -1,13 +1,3 @@
-import { useState } from "react";
-import {
-  useReactTable,
-  getCoreRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  flexRender,
-  getFilteredRowModel,
-} from "@tanstack/react-table";
-
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -26,109 +16,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useAdminStudentTable } from "../hooks/useAdminStudentTable";
+import { flexRender } from "@tanstack/react-table";
 
-// Example data - replace with your actual data fetching logic
-const dummyData = [
-  {
-    id: "1",
-    name: "John Doe",
-    email: "john.doe@example.com",
-    studentId: "ST001",
-    program: "Computer Science",
-    year: "3rd Year",
-  },
-  {
-    id: "2",
-    name: "Jane Smith",
-    email: "jane.smith@example.com",
-    studentId: "ST002",
-    program: "Business Administration",
-    year: "2nd Year",
-  },
-  {
-    id: "3",
-    name: "Robert Johnson",
-    email: "robert.j@example.com",
-    studentId: "ST003",
-    program: "Electrical Engineering",
-    year: "4th Year",
-  },
-  {
-    id: "4",
-    name: "Emily Davis",
-    email: "emily.d@example.com",
-    studentId: "ST004",
-    program: "Psychology",
-    year: "1st Year",
-  },
-  {
-    id: "5",
-    name: "Michael Brown",
-    email: "michael.b@example.com",
-    studentId: "ST005",
-    program: "Medicine",
-    year: "5th Year",
-  },
-];
-
-// Column definitions
-const columns = [
-  {
-    accessorKey: "studentId",
-    header: "Student ID",
-  },
-  {
-    accessorKey: "name",
-    header: "Name",
-  },
-  {
-    accessorKey: "email",
-    header: "Email",
-  },
-  {
-    accessorKey: "program",
-    header: "Program",
-  },
-  {
-    accessorKey: "year",
-    header: "Year",
-  },
-  {
-    id: "actions",
-    header: "Actions",
-    cell: ({ row }) => (
-      <div className="flex space-x-2">
-        <Button variant="outline" size="sm">
-          View
-        </Button>
-        <Button variant="outline" size="sm">
-          Edit
-        </Button>
-      </div>
-    ),
-  },
-];
-
-export default function StudentTable() {
-  const [data, setData] = useState(dummyData);
-  const [globalFilter, setGlobalFilter] = useState("");
-  const [sorting, setSorting] = useState([]);
-
-  const table = useReactTable({
-    data,
-    columns,
-    state: {
-      globalFilter,
-      sorting,
-    },
-    onGlobalFilterChange: setGlobalFilter,
-    onSortingChange: setSorting,
-    getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-  });
-
+export default function AdminStudentTable() {
+  const { table, globalFilter, setGlobalFilter } = useAdminStudentTable();
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
@@ -179,7 +71,10 @@ export default function StudentTable() {
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={columns.length} className="h-24 text-center">
+              <TableCell
+                colSpan={table.getVisibleFlatColumns().length}
+                className="h-24 text-center"
+              >
                 No results.
               </TableCell>
             </TableRow>
